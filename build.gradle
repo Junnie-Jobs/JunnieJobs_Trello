@@ -39,12 +39,11 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-devtools")
 	compile("org.thymeleaf:thymeleaf-spring4:3.0.0.RELEASE")
     compile("org.thymeleaf:thymeleaf:3.0.0.RELEASE")
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile ("org.projectlombok:lombok:1.16.8")
     compile("com.h2database:h2")
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile("junit:junit")
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+
 }
 
 eclipse {

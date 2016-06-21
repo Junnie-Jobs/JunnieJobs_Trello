@@ -48,7 +48,7 @@ import java.util.LinkedHashMap;
 public class Thymeleaf3AutoConfiguration extends WebMvcConfigurerAdapter{
 
     private static final Log logger = LogFactory.getLog(Thymeleaf3AutoConfiguration.class);
-    private static final int CACHE_PERIOD = 31556926; // one year
+//    private static final int CACHE_PERIOD = 31556926; // one year
     
     @Autowired
     private ThymeleafProperties properties;

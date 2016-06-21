@@ -18,8 +18,8 @@ public class HomeController {
 	
 	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
-	@Autowired
-	private UserRepository userRepository;
+//	@Autowired
+//	private UserRepository userRepository;
 	
 	 @RequestMapping("")
 	    public String moveHome() {		

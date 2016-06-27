@@ -8,8 +8,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.template.TemplateLocation;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
+import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +24,7 @@ import org.springframework.util.MimeType;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.thymeleaf.dialect.IDialect;
@@ -41,7 +45,7 @@ import java.util.LinkedHashMap;
  * Customizing org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration 
  */
 @Configuration
-@EnableConfigurationProperties(ThymeleafProperties.class)
+@EnableConfigurationProperties({ThymeleafProperties.class, DataSourceProperties.class})
 @ConditionalOnClass({SpringTemplateEngine.class, SpringContextUtils.class})
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @ComponentScan(basePackages = { "trello" })
@@ -132,5 +136,6 @@ public class Thymeleaf3AutoConfiguration extends WebMvcConfigurerAdapter{
         parameters.putAll(type.getParameters());
         return new MimeType(type, parameters).toString();
     }
+    
 
 }

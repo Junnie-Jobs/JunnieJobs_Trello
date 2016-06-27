@@ -40,7 +40,8 @@ dependencies {
 	compile("org.thymeleaf:thymeleaf-spring4:3.0.0.RELEASE")
     compile("org.thymeleaf:thymeleaf:3.0.0.RELEASE")
     compile ("org.projectlombok:lombok:1.16.8")
-    compile("com.h2database:h2")
+    compile ("org.springframework:spring-jdbc:4.2.5.RELEASE")
+    runtime("com.h2database:h2")
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile("junit:junit")
 

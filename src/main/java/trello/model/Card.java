@@ -28,6 +28,11 @@ public class Card {
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_card_parent_id"))
 	private List list;
 	
+	public Card(){}
+	
+	public Card(String cardName){
+		this.cardName = cardName;
+	}
 	
 	public Card(String cardName, String contents){
 		this.cardName = cardName;

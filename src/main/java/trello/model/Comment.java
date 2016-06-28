@@ -21,17 +21,26 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private Timestamp timeStamp;
+	private String username;
+	private long time;
 	@Column(name = "content", length=1000, nullable=false)
 	private String content;
 	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_comment_parent_id"))
 	private Card card;
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_comment_parent_id"))
+	private List list;
 	
-	public Comment(Timestamp timeStamp, String content){
-		this.timeStamp = timeStamp;
+
+	public Comment(String username, long listId, long cardId, String content, long time) {
+		
+		this.username = username;
 		this.content = content;
+		this.time = time;
 	}
+
+
 
 	
 }

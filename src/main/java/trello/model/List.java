@@ -14,9 +14,12 @@ public class List {
 	private long id;
 	@Column(name = "listName", length = 50, nullable = false)
 	private String listName;
+	private String description;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_list_parent_id"))
 	private Board board;
+	
+	public List(){}
 
 	public List(String listName) {
 		this.listName = listName;

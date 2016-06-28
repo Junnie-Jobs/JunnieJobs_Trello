@@ -26,7 +26,10 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-
+	
+	@OneToMany(mappedBy = "Board")
+	private java.util.List<User> members;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -85,6 +88,15 @@ public class User {
 		}
 		return id.equals(newUserId);
 	}
+
+	public boolean matchPassword(String password) {
+		if (password == null) {
+			return false;
+		}
+
+		return this.password.equals(password);
+	}
+
 	
 
 

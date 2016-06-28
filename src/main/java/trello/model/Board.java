@@ -16,11 +16,13 @@ public class Board {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-
+	private long boardId;
 	@Column(name = "boardName", length = 50, nullable = false)
 	private String boardName;
+	private List members;
 
+	public Board(){}
+	
 	public Board(String boardName) {
 		this.boardName = boardName;
 	}
@@ -30,6 +32,6 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [id=" + id + ", boardName=" + boardName + "]";
+		return "Board [id=" + boardId + ", boardName=" + boardName + "]";
 	}
 }

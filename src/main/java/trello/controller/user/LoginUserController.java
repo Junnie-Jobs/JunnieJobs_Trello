@@ -18,9 +18,9 @@ import trello.model.User;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class LoginUserController {
 
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+	private static final Logger log = LoggerFactory.getLogger(LoginUserController.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -38,9 +38,9 @@ public class UserController {
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
 
 		if (user != null) {
-			log.debug("유저가 이미 존재하여 바로 홈으로 넘어갑니다");
+			log.debug("유저가 이미 존재하여 바로 프로젝트메인으로 이동합니다");
 			model.addAttribute("user", user);
-			return "redirect:/";
+			return "projectMain";
 		}
 
 		user = new User();
@@ -55,6 +55,29 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "redirect:/";
 
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(String email, String password, HttpSession session, Model model) throws Exception {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            model.addAttribute("loginFailed", true);
+            return "/users/login";
+        }
+        
+        if (user.matchPassword(password)) {
+            session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
+            return "redirect:/";
+        } else {
+        	model.addAttribute("loginFailed", true);
+            return "/users/login";
+        }
+    }
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/";	 
 	}
 
 }

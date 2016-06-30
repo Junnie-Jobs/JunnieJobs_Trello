@@ -45,7 +45,7 @@ import java.util.LinkedHashMap;
  * Customizing org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration 
  */
 @Configuration
-@EnableConfigurationProperties({ThymeleafProperties.class, DataSourceProperties.class})
+@EnableConfigurationProperties(ThymeleafProperties.class)
 @ConditionalOnClass({SpringTemplateEngine.class, SpringContextUtils.class})
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @ComponentScan(basePackages = { "trello" })

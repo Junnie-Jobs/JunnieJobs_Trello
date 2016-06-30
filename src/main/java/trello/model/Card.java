@@ -12,10 +12,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "card")
 public class Card {
-	private static Card card = null;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Card {
 	private String contents;
 	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_card_parent_id"))
-	private List list;
+	private Deck deck;
 	
 	public Card(){}
 	
@@ -38,26 +38,6 @@ public class Card {
 		this.cardName = cardName;
 		this.contents = contents;
 	}
-	
-	public static Card getCard(){
-		return card;
-	}
 
-	public long getId() {
-		return id;
-	}
-
-	public String getCardName() {
-		return cardName;
-	}
-
-	public String getcontents() {
-		return contents;
-	}
-
-	@Override
-	public String toString() {
-		return "Card [id=" + id + ", cardName=" + cardName + ", contents=" + contents + "]";
-	}
 	
 }

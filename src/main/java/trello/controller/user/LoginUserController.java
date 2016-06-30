@@ -16,6 +16,7 @@ import trello.config.UserSessionUtils;
 import trello.dao.UserRepository;
 import trello.model.User;
 
+
 @Controller
 @RequestMapping("/users")
 public class LoginUserController {
@@ -26,34 +27,29 @@ public class LoginUserController {
 	private UserRepository userRepository;
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public @ResponseBody String getUserInfo(
+	public String getUserInfo(
 								Model model,
 								@RequestParam String username,
 								@RequestParam String email, 								
 								@RequestParam String password, 
 								HttpSession session) {
 		
-		System.out.println(username);
 		User user = userRepository.findByEmail(email);
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
 
 		if (user != null) {
 			log.debug("유저가 이미 존재하여 바로 프로젝트메인으로 이동합니다");
 			model.addAttribute("user", user);
-			return "projectMain";
+			return "redirect:/gotoprojectMain/"+user.getId();
 		}
-
-		user = new User();
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setUsername(username);
-
-		userRepository.insert(user);
+		
+		user = new User(username, email, password);
+		userRepository.save(user);
 
 		log.debug("새로운 유저가 추가되었습니다.");
 		log.debug("User : {}", user);
 		model.addAttribute("user", user);
-		return "redirect:/";
+		return "redirect:/gotoprojectMain/"+user.getId();
 
 	}
 	
@@ -79,5 +75,4 @@ public class LoginUserController {
 		session.removeAttribute("user");
 		return "redirect:/";	 
 	}
-
 }

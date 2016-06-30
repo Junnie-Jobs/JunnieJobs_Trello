@@ -28,12 +28,9 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_comment_parent_id"))
 	private Card card;
-	@ManyToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="fk_comment_parent_id"))
-	private List list;
 	
 
-	public Comment(String username, long listId, long cardId, String content, long time) {
+	public Comment(String username, long DeckId, long cardId, String content, long time) {
 		
 		this.username = username;
 		this.content = content;

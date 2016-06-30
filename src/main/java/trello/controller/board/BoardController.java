@@ -5,31 +5,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import core.web.argumentresolver.LoginUser;
 import trello.dao.BoardRepository;
-import trello.model.Board;
-import trello.model.User;
+import trello.dao.DeckRepository;
+
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/boards")
 public class BoardController {
-	
+
+//
 	@Autowired
-	private BoardRepository boardRepository;
-	
-	
-	@RequestMapping(value = "/{boardId}", method = RequestMethod.POST)
+	private DeckRepository deckRepository;
+
+	@RequestMapping(value = "/board/{boardId}")
 	public String showBoard(@PathVariable long boardId, Model model) throws Exception {
-		model.addAttribute("lists", boardRepository.findAll());
-		return "list";
+
+		if (deckRepository.findOne(boardId) != null) {
+			model.addAttribute("decks", deckRepository.findAll());
+			return "board";
+		}
+		return "board";
 	}
-	
-	
-	
-	
-	
-	
 
 }

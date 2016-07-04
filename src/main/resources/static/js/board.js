@@ -2,8 +2,8 @@ var TODO = (function (window){
 
 	 'use strict';
 	 
-	var baseURL = "http://localhost:8888"
-
+//	var baseURL = "http://localhost:8888";
+		var baseURL = "http://junniejobs.xyz";
 
 
 //    var list_template = Handlebars.compile(deck_html);

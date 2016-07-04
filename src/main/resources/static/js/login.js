@@ -2,8 +2,8 @@ var LOGIN = (function (window){
 
 	 'use strict';
 	 
-	var baseURL = "http://localhost:8888";
-//		var baseURL = "http://junniejobs.xyz";
+//	var baseURL = "http://localhost:8888";
+	var baseURL = "http://junniejobs.xyz";
    			             
 
 	function init(){

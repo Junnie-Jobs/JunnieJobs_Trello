@@ -1,17 +1,22 @@
 package trello.controller.home;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import trello.dao.BoardRepository;
 import trello.dao.UserRepository;
+import trello.model.User;
 
 @Controller
 public class HomeController {
@@ -33,17 +38,19 @@ private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 	    public String signUp() {
 	        return "signUp";
 	 }
+	 
 	 @RequestMapping("/login")
 	    public String login() {
 	        return "login";
 	 }
 	 
-	 @RequestMapping(value ="/gotoprojectMain/{userId}", method = RequestMethod.GET)
+	 @RequestMapping(value ="/boards/{userId}", method = RequestMethod.GET)
 	    public ModelAndView projectMain(Model model, @PathVariable Long userId) {
 		 
 		 ModelAndView mav = new ModelAndView("boards");
 		 mav.addObject("boards", boardRepository.findAll());
-		 mav.addObject("user", userRepository.findById(userId));
+		 User user = userRepository.findById(userId);
+		 mav.addObject("user", user);
 	     return mav;
 	 }
 	 

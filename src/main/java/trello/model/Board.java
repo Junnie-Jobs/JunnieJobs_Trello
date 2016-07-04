@@ -25,9 +25,9 @@ public class Board {
 	@Column(name = "boardName", length = 50, nullable = false)
 	private String boardName;
 		
-//	@Column(name = "boardHasList")
-//	@OneToMany
-//	private java.util.List<List> lists;
+	@Column(name = "boardHasList")
+	@OneToMany
+	private java.util.List<Deck> decks;
 //	
 //	@Column(name = "members")
 //	@OneToMany

@@ -2,6 +2,11 @@
 @import url('http://fonts.googleapis.com/earlyaccess/jejuhallasan.css');
 @import url('http://fonts.googleapis.com/earlyaccess/hanna.css');
 
+a{
+    color: rgba(0,0,0,0.5);
+	text-decoration: none;
+}
+
 #header{
 	width: 100%;
 	height: 40px;
@@ -32,7 +37,7 @@
 	margin: 20px 0 20px 0px;
 }
 
-#boards_list .board{
+.board{
 
 	width: 275px;
 	height: 90px;
@@ -45,6 +50,12 @@
 	margin: 0 0 30px 30px;
 /*	border-radius: 5px;*/
 
+}
+
+.board:hover{
+	
+	/* background-color:rgba(81,167,249,0.2); */
+	background-color:white;
 }
 
 #boards_list #create_board{

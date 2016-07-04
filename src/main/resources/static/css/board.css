@@ -2,7 +2,8 @@
 @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 
 a{
-    color:#000;
+    color: rgba(0,0,0,0.5);
+	text-decoration: none;
 }
 
 body{
@@ -202,18 +203,18 @@ body{
 
     }
 
-.list_wrapper .card_composer .add_card_form{
+.list_wrapper .card_composer .show_add_card_form_form{
     display: none;
     border:none;
 }
 
-.list_wrapper .card_composer .add_card_form a{
+.list_wrapper .card_composer .show_add_card_form_form a{
     color:rgba(0,0,0,.5);
     margin-top: 5px;
     margin-left: 9px;
 }
 
-.list_wrapper .card_composer .add_card_form a.card_cancel{
+.list_wrapper .card_composer .show_add_card_form_form a.card_cancel{
    margin-left: 10px;
 }
 
@@ -231,7 +232,7 @@ body{
     border-bottom: 1px solid #ccc;
 
 }
-.add_card{
+.show_add_card_form{
 
     border-radius: 0 0 3px 3px;
     color: #8c8c8c;
@@ -247,7 +248,7 @@ body{
 }
 
 
-.add_list{
+.add_deck{
 
 /*  background: rgba(0,0,0,.1);*/
     cursor: pointer;
@@ -258,11 +259,11 @@ body{
     display: inline-block;
 }
 
-.add_list .add_list_form a{
+.add_deck .add_deck_form a{
    color:rgba(0,0,0,.5);
 }
 
-.add_list .add_list_form a.cancel{
+.add_deck .add_deck_form a.cancel{
    margin-left: 10px;
 }
 
@@ -279,12 +280,12 @@ body{
     display: none;
 }
 
-.add_list_form{
+.add_deck_form{
     display: none;
 }
 
 
-.add_list form .input-field {
+.add_deck form .input-field {
 
     background: 0 0;
     width: 90%;

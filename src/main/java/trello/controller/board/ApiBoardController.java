@@ -1,6 +1,8 @@
 package trello.controller.board;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,21 @@ public class ApiBoardController {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	@RequestMapping(value = "/newBoard", method = RequestMethod.POST)
-	public String createBoard(@LoginUser User loginUser, String boardName) throws Exception {
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public Board createBoard(@LoginUser User loginUser, String boardName) throws Exception {
 		Board newBoard = new Board(boardName);
-		boardRepository.save(newBoard);
-		return newBoard.getBoardName();
+		boardRepository.save(newBoard);	
+		return newBoard;
 	}
+	
+//	@RequestMapping(value = "/{boardId}", method = RequestMethod.POST)
+//	public String moveToBoard(@PathVariable boardId) throws Exception {
+//
+//		boardRepository.save(newBoard);
+//		return newBoard.getBoardName();
+//	}
+	
+	
 
 //	@RequestMapping(value = "/newList", method = RequestMethod.POST)
 //	public String createList(@LoginUser User loginUser, String listName) throws Exception {

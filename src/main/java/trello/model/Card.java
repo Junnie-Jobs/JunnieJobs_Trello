@@ -16,28 +16,26 @@ import lombok.Data;
 @Entity
 @Table(name = "card")
 public class Card {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	@Column(name = "cardName", length=70, nullable=false)
+	private long cardId;
+	@Column(name = "cardName", length = 70, nullable = false)
 	private String cardName;
-	@Column(name="contents", length=100, nullable=true)
+	@Column(name = "contents", length = 100, nullable = true)
 	private String contents;
 	@ManyToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="fk_card_parent_id"))
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_card_parent_id"))
 	private Deck deck;
-	
-	public Card(){}
-	
-	public Card(String cardName){
-		this.cardName = cardName;
-	}
-	
-	public Card(String cardName, String contents){
-		this.cardName = cardName;
-		this.contents = contents;
+
+	public Card() {
 	}
 
-	
+	public Card(String cardName, Deck deck) {
+
+		this.cardName = cardName;
+		this.deck = deck;
+
+	}
+
 }

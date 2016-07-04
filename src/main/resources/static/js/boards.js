@@ -1,17 +1,13 @@
-var TODO = (function (window){
+var BOARDS = (function (window){
 	
 	var baseURL = "http://localhost:8989"
 
 	 'use strict';
 
-	 var board_btn = " <li class='board waves-effect waves-light btn'>" +		
-	 						"<a href='index.html' th:href='@{/boards/board/{boardId}(boardId=${board.boardId})}'>" +
-	 						"{{input-value}}</a>" +
-	 					"</li>";
-	 						
+
+	 
 	function init(){
 
-//		$("#boards_list").on("click", ".board", page_nav);
 		$("#create_board").on("click", create_board);
 		$(".add_project_btn").on("click", create_new_project);
 		$(".save").on("click", add_project);
@@ -28,13 +24,7 @@ var TODO = (function (window){
 	function add_project(){
 
 		var project_name = $("#add_project").val();
-		var str = board_btn.replace(/\{\{input-value\}\}/gi,project_name);
-		console.log(str);
-		$("#boards_list").prepend(str);
-		console.log(str);
-		$("#add_project").val("");
-		$(".add_project_form").css('display','none');
-		$(".btn-floating").css('display','block');
+		
 		
 		var data = {};
 		data.boardName = project_name;
@@ -53,6 +43,22 @@ var TODO = (function (window){
 				"data" : data
 			}).done(function(data) {
 				console.log("newBoard success")
+				
+				var board_btn = 
+					
+					"<li class='board board_btn waves-effect waves-light btn'>" +
+				"<a href='/boards/board/"+data.boardId+"'"+">" +
+	 						"{{input-value}}</a>" +
+	 					"</li>";
+				
+				var str = board_btn.replace(/\{\{input-value\}\}/gi,project_name);
+				$("#boards_list").prepend(str);
+				console.log(str);
+				$("#add_project").val("");
+				$(".add_project_form").css('display','none');
+				$(".btn-floating").css('display','block');
+
+				
 			}).fail(function(status) {
 				console.log("newBoard fail");
 			});
@@ -66,10 +72,6 @@ var TODO = (function (window){
 		$(".add_project_form").css('display','block');
 	}
 
-//	function page_nav(){
-//		window.location.href = ("board");
-//	}
-
 	function create_board(){
 		$("#boards_list").prepend(board_btn);
 	}
@@ -81,5 +83,5 @@ var TODO = (function (window){
 })(window);
 
 $(function(){
-    TODO.init();
+	BOARDS.init();
 });

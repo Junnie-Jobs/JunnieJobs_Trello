@@ -40,7 +40,7 @@ public class LoginUserController {
 		if (user != null) {
 			log.debug("유저가 이미 존재하여 바로 프로젝트메인으로 이동합니다");
 			model.addAttribute("user", user);
-			return "redirect:/gotoprojectMain/"+user.getId();
+			return "redirect:/boards/"+user.getId();
 		}
 		
 		user = new User(username, email, password);
@@ -49,24 +49,31 @@ public class LoginUserController {
 		log.debug("새로운 유저가 추가되었습니다.");
 		log.debug("User : {}", user);
 		model.addAttribute("user", user);
-		return "redirect:/gotoprojectMain/"+user.getId();
+		return "redirect:/boards/"+user.getId();
 
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String email, String password, HttpSession session, Model model) throws Exception {
-        User user = userRepository.findByEmail(email);
+       		
+		User user = userRepository.findByEmail(email);
+
         if (user == null) {
+        	log.debug("user가 존재하지 않습니다");
             model.addAttribute("loginFailed", true);
-            return "/users/login";
+            return "redirect:/";
         }
         
         if (user.matchPassword(password)) {
+        	System.out.println("로그인 성공!");
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
-            return "redirect:/";
+            model.addAttribute(user);
+            return "redirect:/boards/"+user.getId();
+   
         } else {
+        	log.debug("user의 패스워드가 일치하지 않습니다.");
         	model.addAttribute("loginFailed", true);
-            return "/users/login";
+            return "redirect:/";
         }
     }
 	

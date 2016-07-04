@@ -21,7 +21,7 @@
 
 .login_form_wrapper .login_title{
 
-  margin: 3em auto 1em auto;
+  margin: 2em auto 1em auto;
   width: 300px;
   font-size: 30px;
   font-weight: bold;
@@ -43,6 +43,20 @@
   text-align: center;
   cursor: pointer;
 
+}
+
+.login_form_wrapper .login_with_facebook{
+	
+  margin: -1em auto 1em auto;
+  width: 300px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: normal;
+  font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
+  color: rgba(0,0,0,.4);
+  text-align: center;
+  cursor: pointer;
 }
 
 .login_form_wrapper .option_boundary{
@@ -67,19 +81,20 @@ margin-bottom: 2em;
   width: 300px;
 }
 
-.login_form_wrapper .btn_area{
+/* .login_form_wrapper .btn_area{
   margin: 0 auto;
   width: 300px;
   padding: 0 0 0 30px;
 }
-
-.login_form_wrapper .btn_area .login_btn, .login_form_wrapper .btn_area .signUp_btn{
+ */
+.login_form_wrapper .btn_area .login_btn, .login_form_wrapper .btn_area .login_btn{
   width: 100px;
-  display: inline-block;
+  display: block;
   padding: 5px;
-  margin-right: 2em;
+  margin:0 auto;
   text-align: center;
   color: rgba(0,0,0,.4);
   font-weight: normal;
   cursor: pointer;
+  border:none;
 }

@@ -67,7 +67,7 @@ public class LoginUserController {
         if (user.matchPassword(password)) {
         	System.out.println("로그인 성공!");
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
-            model.addAttribute(user);
+      
             return "redirect:/boards/"+user.getId();
    
         } else {

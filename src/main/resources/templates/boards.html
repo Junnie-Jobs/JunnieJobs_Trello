@@ -10,11 +10,11 @@
 <body>
 	<div id="header" class="z-depth-1"><a href="http://localhost:8989/">JWP-Trello</a></div>
 	 <div id="my_board" th:text="${user.username}+'\'s board'">My Boards</div>
-<!-- 	<div id="my_board">My Boards</div> -->
+	 <input type="hidden" class="userId" th:value=${user.id}>
 	  <ul id="boards_list">
           <ul th:each="board: ${boards}">
             <li class="board project_1 waves-effect waves-light btn">
-            	<a th:href="|/boards/board/${board.boardId}|" th:text="${board.boardName}">First Project</a></li>
+            	<a th:href="|/boards/board/${board.boardId}/${user.id}|" th:text="${board.boardName}">First Project</a></li>
           </ul> 
              <div class="add_project not_sortable" >
                <a class="btn-floating btn-large waves-effect waves-light red add_project_btn">

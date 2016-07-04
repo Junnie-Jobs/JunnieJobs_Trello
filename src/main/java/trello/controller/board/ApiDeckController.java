@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.web.argumentresolver.LoginUser;
 import trello.dao.BoardRepository;
 import trello.dao.DeckRepository;
 import trello.model.Board;
@@ -23,7 +22,7 @@ public class ApiDeckController {
 	private DeckRepository deckRepository;
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public Deck createDeck(@LoginUser User loginUser, String deckName, long boardId) throws Exception {
+	public Deck createDeck(String deckName, long boardId) throws Exception {
 		
 		Board board = boardRepository.findOne(boardId);
 		Deck newDeck = new Deck(deckName, board);

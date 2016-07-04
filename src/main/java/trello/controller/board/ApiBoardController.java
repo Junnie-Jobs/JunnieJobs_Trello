@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-
-import core.web.argumentresolver.LoginUser;
 import trello.dao.BoardRepository;
 import trello.model.Board;
 import trello.model.Card;
@@ -26,19 +23,11 @@ public class ApiBoardController {
 	private BoardRepository boardRepository;
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public Board createBoard(@LoginUser User loginUser, String boardName) throws Exception {
+	public Board createBoard(String boardName) throws Exception {
 		Board newBoard = new Board(boardName);
 		boardRepository.save(newBoard);	
 		return newBoard;
 	}
-	
-//	@RequestMapping(value = "/{boardId}", method = RequestMethod.POST)
-//	public String moveToBoard(@PathVariable boardId) throws Exception {
-//
-//		boardRepository.save(newBoard);
-//		return newBoard.getBoardName();
-//	}
-	
 	
 
 //	@RequestMapping(value = "/newList", method = RequestMethod.POST)

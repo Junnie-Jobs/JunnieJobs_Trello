@@ -1,7 +1,7 @@
 var BOARDS = (function (window){
 	
-//	var baseURL = "http://localhost:8888"
-	var baseURL = "http://junniejobs.xyz";
+	var baseURL = "http://localhost:8888"
+//	var baseURL = "http://junniejobs.xyz";
 
 	 'use strict';
 
@@ -25,6 +25,7 @@ var BOARDS = (function (window){
 	function add_project(){
 
 		var project_name = $("#add_project").val();
+		var userId = $(".userId").val();
 		
 		
 		var data = {};
@@ -38,7 +39,6 @@ var BOARDS = (function (window){
 		if (project_name !== null) {
 
 			$.ajax({
-
 				"url" : baseURL + "/api/board/new",
 				"type" : "POST",
 				"data" : data
@@ -48,7 +48,7 @@ var BOARDS = (function (window){
 				var board_btn = 
 					
 					"<li class='board board_btn waves-effect waves-light btn'>" +
-				"<a href='/boards/board/"+data.boardId+"'"+">" +
+				"<a href='/boards/board/"+data.boardId+"/"+userId+"'"+">" +
 	 						"{{input-value}}</a>" +
 	 					"</li>";
 				

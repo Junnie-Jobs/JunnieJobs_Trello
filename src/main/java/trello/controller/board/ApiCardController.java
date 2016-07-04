@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import core.web.argumentresolver.LoginUser;
 import trello.dao.BoardRepository;
 import trello.dao.CardRepository;
 import trello.dao.DeckRepository;
@@ -28,7 +26,7 @@ public class ApiCardController {
 	private CardRepository cardRepository;
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public Card createCard(@LoginUser User loginUser, String cardName, long deckId) throws Exception {
+	public Card createCard(String cardName, long deckId) throws Exception {
 		
 		Deck deck = deckRepository.findOne(deckId);
 		Card newCard = new Card(cardName, deck);

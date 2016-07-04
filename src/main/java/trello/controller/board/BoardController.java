@@ -8,10 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import core.web.argumentresolver.LoginUser;
 import trello.dao.BoardRepository;
 import trello.dao.DeckRepository;
+import trello.dao.UserRepository;
 import trello.model.User;
 
 @Controller
@@ -25,25 +24,18 @@ public class BoardController {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
-	// @RequestMapping(value = "/{boardId}")
-	// public String showBoards(@PathVariable long boardId, ModelAndView mav)
-	// throws Exception {
-	//
-	// if (deckRepository.findOne(boardId) != null) {
-	// model.addAttribute("decks", deckRepository.findAll());
-	// return "board";
-	// }
-	// return "board";
-	// }
-
-	@RequestMapping(value = "/board/{boardId}")
-	public ModelAndView showBoard(@LoginUser User loginUser, @PathVariable long boardId) throws Exception {
+	@RequestMapping(value = "/board/{boardId}/{userId}")
+	public ModelAndView showBoard(@PathVariable long boardId, @PathVariable long userId) throws Exception {
 
 		LOGGER.info("{}", deckRepository.findAll());
-		
 		ModelAndView mav = new ModelAndView("board");	
 		mav.addObject("board", boardRepository.findOne(boardId));
+		mav.addObject("user", userRepository.findById(userId));
+		
 		if (deckRepository.findOne(boardId) != null) {			
 			mav.addObject("decks", deckRepository.findAll());
 			return mav;

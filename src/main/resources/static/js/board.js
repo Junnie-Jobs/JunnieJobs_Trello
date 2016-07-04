@@ -2,18 +2,12 @@ var TODO = (function (window){
 
 	 'use strict';
 	 
-//	var baseURL = "http://localhost:8888";
-		var baseURL = "http://junniejobs.xyz";
+	 	var baseURL = "http://localhost:8888";
+//		var baseURL = "http://junniejobs.xyz";
 
 
-//    var list_template = Handlebars.compile(deck_html);
-
-
-
-//    var card_template = Handlebars.compile(card_html);
-
-    var comment_html =   "<div class='comment'>" +
-			                    "<div class='commenter'>{writer_name}</div>" +
+    var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +
+			                    "<div class='commenter'>{{writer_name}}</div>" +
 			                    "<div class='comment_contents z-depth-1'>{{comment_contents}}</div>" +
 			                    "<div class='comment_date'>{{current_time}} - </div>" +
 			                    "<div class='comment_reply'> Reply</div>" +
@@ -93,16 +87,51 @@ var TODO = (function (window){
 	}
 
 	function add_comment(e){
+		
+		var cardId = $(e.target).closest(".list_card").data("id");
+		console.log(cardId);
 	
 		var comment_contents = $(".comment_contents").val();
+		var writer_name = $(".username").val();
 		var now = new Date();
 		var currentTime = now.getDate() + " " +
 					  month_written_english(now.getMonth()+1) + " " +
 					  now.getFullYear() + " at " +
 					  now.getHours() + ":" +
 					  now.getMinutes();
-		$(comment_template({"comment_contents":comment_contents, "current_time":currentTime})).appendTo(".comments");
-		$(".comment_contents").val("");
+		
+		var cardId = $(".hiddenCardId").val();
+		
+		var data = {};
+		data.cardId = cardId;
+		data.username = writer_name;
+		data.contents = comment_contents;
+		data.timeStamp = currentTime;
+		console.log(data);
+		
+		if (comment_contents === "") {
+			alert("내용을 입력해주세요");
+			return;
+		}
+		
+		if (comment_contents !== null) {
+
+			$.ajax({
+				"url" : baseURL + "/api/comment/new",
+				"type" : "POST",
+				"data" : data
+			}).done(function(data) {
+				console.log("newComment success")
+				console.log(data);
+				$(comment_template({"dataId":data.commentId,"comment_contents":comment_contents, "current_time":currentTime, "writer_name":writer_name})).appendTo(".comments");
+				$(".comment_contents").val("");	
+			}).fail(function(status) {
+				console.log("newComment fail " + status);
+			});
+		}		
+		
+		
+		
 
 
 	}
@@ -147,6 +176,8 @@ var TODO = (function (window){
 		$(".card_title_in_modal").text(title);
 		var list_name = $(e.target).closest(".list_content").find(".list_header_name").val();
 		$(".list_name").text(list_name);
+		$(".hiddenCardId").val($(e.target).closest(".list_card").data("id"));
+
 	}
 
 	function card_cancel(e){

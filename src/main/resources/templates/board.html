@@ -8,11 +8,18 @@
     </head>
 
     <body>
+    
+     <input type="hidden" class="boardId" th:value=${board.boardId}></input>
+   	 <input type="hidden" class="username" th:value=${user.username}></input>
+   
       <div class="shadow_body"></div>
        <div id="header" class="z-depth-1">
            <span class="header_text">JWP-Trello<span>
            <a class="modal-trigger z-depth-1" href="#modal1">Member +</a>
        </div>
+       
+       
+       
 
        <!-- Modal Structure -->
           <div id="modal1" class="modal">
@@ -21,24 +28,20 @@
                 <input class="address_for_invitation" type="text" placeholder="e.g. taco@trello.com"/>
                 <div class="invite_for_project">Invite</div>
             </div>
-          </div>
-   <input type="hidden" class="boardId" th:value=${board.boardId}></input>
+          </div>  
        <div id="board_info">
-  
-           <div class="project_name" th:text="${board.boardName}">JWP's First Project </div> 
-         <!--  <div class="project_name">JWP's First Project </div> -->
+           <div class="project_name" th:text="${board.boardName}">JWP's First Project </div>     
        </div>
 
        <div id="board_canvas" class="list_sortable" >
-         <!--  <div class="list_wrapper" th:each="deck : ${decks}">
+       
+       	<div class="list_wrapper" th:each="deck : ${decks}">
             <div class="list_content z-depth-1">
                 <div class="list_header">
                   <textarea class="list_header_name" value="First Todo" th:text="{deck.deckName}">Todo Header</textarea>
                 </div>
-
                 <div class="list_cards">
                 </div>
-
                  <div class="card_composer">
                     <div class="show_add_card_form_form">
                       <textarea class="list_card_composer_textarea"></textarea>
@@ -49,8 +52,8 @@
                 </div>
              
             </div>  
-          </div> -->
-
+          </div>
+       
           <div class="add_deck not_sortable" >
              <a class="btn-floating btn-large waves-effect waves-light red">
                     <i class="material-icons">add</i>
@@ -91,7 +94,7 @@
     </div>
 
      <div class="modal_sidebar">
-
+     <input type="hidden" class="hiddenCardId" value="cardId"/>
               <p>Add</p>
               <div class="modal_sidebar_btn z-depth-1 members_btn">Members</div>
 

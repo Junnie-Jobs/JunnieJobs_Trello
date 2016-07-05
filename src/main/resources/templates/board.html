@@ -35,12 +35,17 @@
 
        <div id="board_canvas" class="list_sortable" >
        
-       	<div class="list_wrapper" th:each="deck : ${decks}">
+       	<div class="list_wrapper" th:each="deck : ${decks}" th:attr="data-id=${deck.deckId}">
             <div class="list_content z-depth-1">
                 <div class="list_header">
-                  <textarea class="list_header_name" value="First Todo" th:text="{deck.deckName}">Todo Header</textarea>
+                  <textarea class="list_header_name" value="First Todo" th:text="${deck.deckName}">Todo Header</textarea>
                 </div>
-                <div class="list_cards">
+                <div class="list_cards" th:each="card : ${cards}">
+                		<div class='list_card' th:attr="data-id=${card.cardId}">
+      						<div class='list_card_detail'>
+                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.cardName}"></a>
+                     	 	</div>
+                      </div>
                 </div>
                  <div class="card_composer">
                     <div class="show_add_card_form_form">
@@ -53,6 +58,8 @@
              
             </div>  
           </div>
+          
+  
        
           <div class="add_deck not_sortable" >
              <a class="btn-floating btn-large waves-effect waves-light red">

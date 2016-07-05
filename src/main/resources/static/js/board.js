@@ -2,8 +2,8 @@ var TODO = (function (window){
 
 	 'use strict';
 	 
-//	 	var baseURL = "http://localhost:8888";
-		var baseURL = "http://junniejobs.xyz";
+	 	var baseURL = "http://localhost:8888";
+//		var baseURL = "http://junniejobs.xyz";
 
 
     var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +
@@ -218,11 +218,13 @@ var TODO = (function (window){
 		
 		var boardId = $(".boardId").val();
 		var deckId = $(e.target).closest(".list_wrapper").data("id");
+		console.log(deckId);
 		
 		var data = {};
 		data.cardName = card_Name;
 		data.deckId = deckId;
-		data.boardId = boardId;
+
+//		data.boardId = boardId;
 		
 		if (card_Name === "") {
 			alert("제목을 입력해주세요");

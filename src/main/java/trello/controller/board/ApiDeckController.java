@@ -26,7 +26,6 @@ public class ApiDeckController {
 		
 		Board board = boardRepository.findOne(boardId);
 		Deck newDeck = new Deck(deckName, board);
-		System.out.println(newDeck);
 		deckRepository.save(newDeck);	
 		return newDeck;
 	}

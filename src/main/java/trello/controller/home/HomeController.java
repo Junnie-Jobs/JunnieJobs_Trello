@@ -42,19 +42,4 @@ private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 	        return "login";
 	 }
 	 
-	 @RequestMapping(value ="/boards/{userId}", method = RequestMethod.GET)
-	    public ModelAndView projectMain(Model model, @PathVariable Long userId) {
-		 
-		 ModelAndView mav = new ModelAndView("boards");
-		 mav.addObject("boards", boardRepository.findAll());
-		 User user = userRepository.findById(userId);
-		 mav.addObject("user", user);
-	     return mav;
-	 }
-	 
-	 @RequestMapping("/board/list")
-	    public String board() {
-	        return "list";
-	 }
-
 }

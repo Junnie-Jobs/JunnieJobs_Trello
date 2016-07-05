@@ -35,7 +35,7 @@ public class BoardController {
 	@Autowired
 	private CardRepository cardRepository;
 	
-	 @RequestMapping(value ="/boards/{userId}", method = RequestMethod.GET)
+	 @RequestMapping(value ="/{userId}", method = RequestMethod.GET)
 	    public ModelAndView projectMain(Model model, @PathVariable Long userId) {
 		 
 		 ModelAndView mav = new ModelAndView("boards");

@@ -2,8 +2,8 @@ var TODO = (function (window){
 
 	 'use strict';
 	 
-	 	var baseURL = "http://localhost:8888";
-//		var baseURL = "http://junniejobs.xyz";
+//	 	var baseURL = "http://localhost:8888";
+		var baseURL = "http://junniejobs.xyz";
 
 
     var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +

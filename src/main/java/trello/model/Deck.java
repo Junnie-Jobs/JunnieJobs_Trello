@@ -1,7 +1,19 @@
 package trello.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//import org.codehaus.jackson.annotate.JsonIgnore;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
 @Data
@@ -13,17 +25,26 @@ public class Deck {
 	private long deckId;
 	@Column(name = "deckName", length = 50, nullable = false)
 	private String deckName;
-	@Column(name="description")
-	private String description;	
+
+//	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_deck_parent_id"))
+	@NotNull
 	private Board board;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "deck")
+	private List<Card> cards;
+
 	public Deck(){}
 
-	public Deck(String deckName, Board board) {
+	public Deck(Board board, String deckName) {
 		this.deckName = deckName;
 		this.board = board;
 	}
 
+	public void addCard(Card card) {
+		cards.add(card);
+	}
+	
+	
 }

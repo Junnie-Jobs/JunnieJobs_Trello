@@ -9,7 +9,6 @@ import trello.dao.CardRepository;
 import trello.dao.DeckRepository;
 import trello.model.Card;
 import trello.model.Deck;
-import trello.model.User;
 
 @RestController
 @RequestMapping("/api/card")
@@ -24,6 +23,12 @@ public class ApiCardController {
 	
 	@Autowired
 	private CardRepository cardRepository;
+	
+	@RequestMapping(value= "", method = RequestMethod.GET)
+	public Iterable<Card> cards() {
+		return cardRepository.findAll();
+	}
+	
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public Card createCard(String cardName, long deckId) throws Exception {

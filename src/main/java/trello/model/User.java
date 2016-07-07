@@ -3,6 +3,10 @@ package trello.model;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +14,6 @@ import lombok.Data;
 @Table(name = "user")
 public class User {
 	
-	public static final GuestUser GUEST_USER = new GuestUser();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,9 +25,10 @@ public class User {
 	private String email;
 	@Column(name = "password")
 	private String password;
-//	@ManyToMany
-//	private List boards;
 
+	@Transient // - 데이타베이스에 매핑이 안되게 하는거
+	private String rawPassword;
+	
 	public User() {
 	}
 
@@ -34,16 +38,6 @@ public class User {
 		this.password = password;
 	}
 	
-	public boolean isGuestUser() {
-		return false;
-	}
-
-	private static class GuestUser extends User {
-		@Override
-		public boolean isGuestUser() {
-			return true;
-		}
-	}
 	
 	public boolean matchPassword(String password) {
 		if (password == null) {
@@ -52,16 +46,11 @@ public class User {
 
 		return this.password.equals(password);
 	}
-	
-	public boolean isSameUser(User user) {
-		return isSameUser(user.getId());
-	}
 
-	public boolean isSameUser(Long newUserId) {
-		if (id == null) {
-			return false;
-		}
-		return id.equals(newUserId);
+	public void encodePassword(PasswordEncoder passwordEncoder) {
+		this.password = passwordEncoder.encode(rawPassword);
+		
 	}
+	
 
 }

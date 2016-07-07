@@ -2,6 +2,8 @@ package trello.model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -12,7 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.Getter;
+
 
 @Data
 @Entity
@@ -24,10 +31,15 @@ public class Board {
 	private long boardId;
 	@Column(name = "boardName", length = 50, nullable = false)
 	private String boardName;
-		
-	@Column(name = "boardHasList")
-	@OneToMany
-	private java.util.List<Deck> decks;
+	
+//	@ManyToOne
+//	@JoinColumn(foreignKey = @ForeignKey(name = "fk_creator_id"))
+//	private User creator;
+	
+	@JsonIgnore	
+	@OneToMany(mappedBy = "board")
+//	@Getter(onMethod = @__( @JsonIgnore ))
+	private List<Deck> decks;
 //	
 //	@Column(name = "members")
 //	@OneToMany

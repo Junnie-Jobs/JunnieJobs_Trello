@@ -2,8 +2,9 @@ var TODO = (function (window){
 
 	 'use strict';
 	 
-//	 	var baseURL = "http://localhost:8888";
-		var baseURL = "http://junniejobs.xyz";
+	 	var baseURL = "http://localhost:9090";
+//	 	var baseURL = "http://localhost:8989";
+//		var baseURL = "http://junniejobs.xyz";
 
 
     var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +
@@ -256,6 +257,7 @@ var TODO = (function (window){
 
 			}).fail(function(status) {
 				console.log("newDeck fail " + status);
+				
 			});
 		}		
 	}
@@ -309,6 +311,7 @@ var TODO = (function (window){
 			
 			}).fail(function(status) {
 				console.log("newDeck fail " + status);
+				console.log(status);
 			});
 		}
 		

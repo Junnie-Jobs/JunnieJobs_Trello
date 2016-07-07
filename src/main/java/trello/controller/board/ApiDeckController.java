@@ -1,6 +1,8 @@
 package trello.controller.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +27,10 @@ public class ApiDeckController {
 	public Deck createDeck(String deckName, long boardId) throws Exception {
 		
 		Board board = boardRepository.findOne(boardId);
-		Deck newDeck = new Deck(deckName, board);
-		deckRepository.save(newDeck);	
+		Deck newDeck = new Deck(board, deckName);
+//		board.getDecks().add(newDeck);
+		deckRepository.save(newDeck);
+//		return new ResponseEntity<Deck>(newDeck, HttpStatus.CREATED);
 		return newDeck;
 	}
 	

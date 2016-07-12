@@ -14,7 +14,7 @@ import lombok.Data;
 @Table(name = "user")
 public class User {
 	
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -38,15 +38,6 @@ public class User {
 		this.password = password;
 	}
 	
-	
-	public boolean matchPassword(String password) {
-		if (password == null) {
-			return false;
-		}
-
-		return this.password.equals(password);
-	}
-
 	public void encodePassword(PasswordEncoder passwordEncoder) {
 		this.password = passwordEncoder.encode(rawPassword);
 		

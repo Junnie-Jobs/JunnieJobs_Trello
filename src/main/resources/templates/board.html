@@ -32,7 +32,6 @@
        <div id="board_info">
            <div class="project_name" th:text="${board.boardName}">JWP's First Project </div>     
        </div>
-	<p th:text="${board.decks!=null}?${board.decks}"></p>
        <div id="board_canvas" class="list_sortable" >
        
        	<div class="list_wrapper" th:each="deck : ${board.decks!=null}?${board.decks}" th:attr="data-id=${deck.deckId}">
@@ -40,10 +39,10 @@
                 <div class="list_header">
                   <textarea class="list_header_name" value="First Todo" th:text="${deck.deckName}">Todo Header</textarea>
                 </div>
-                <div class="list_cards" th:each="card : ${deck.cards}">
+               		 <div class="list_cards" th:each="card : ${deck.cards}">
                 		<div class='list_card' th:attr="data-id=${card.cardId}">
       						<div class='list_card_detail'>
-                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.cardName}"></a>
+                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.title}"></a>
                      	 	</div>
                       </div>
                 </div>

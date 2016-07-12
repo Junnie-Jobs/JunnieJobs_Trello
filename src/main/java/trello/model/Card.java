@@ -21,21 +21,29 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-//@JsonIgnoreProperties({"deck"})
-@Data
+
 @Entity
 @Table(name = "card")
 public class Card {
 
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long cardId;
+	
+	@Getter
+	@Setter
 	@Column(name = "title", length = 150, nullable = false)
 	private String title;
+	
+	@Getter
+	@Setter
 	@Column(name = "description", length = 3000, nullable = true)
 	private String description;
 	
-//	@JsonIgnore
+	@Getter(onMethod = @__( @JsonIgnore ))
+	@Setter
 	@NotNull
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_deck_id"))

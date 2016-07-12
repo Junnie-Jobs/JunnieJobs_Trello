@@ -10,20 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.security.core.userdetails.User;
 import trello.dao.BoardRepository;
-import trello.dao.CardRepository;
-import trello.dao.DeckRepository;
 import trello.dao.UserRepository;
-import trello.model.Board;
-import trello.model.Deck;
-import trello.model.User;
+
 
 @Controller
 @RequestMapping("/boards")
@@ -37,15 +31,11 @@ public class BoardController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
 	@Secured("ROLE_USER")
 	@RequestMapping(value ="", method = RequestMethod.GET)
-    public ModelAndView boardsPage(Principal principal) {
-	
-//	User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 왜 되다가 안될까?
-	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	 String username = auth.getName();
-	 User user = userRepository.findByUsername(username);
+    public ModelAndView boardsPage(@AuthenticationPrincipal User activeUser) {
+
+	 trello.model.User user = userRepository.findByUsername(activeUser.getUsername());
 	 ModelAndView mav = new ModelAndView("boards");
 	 mav.addObject("boards", boardRepository.findAll());
 	 mav.addObject("user", user);

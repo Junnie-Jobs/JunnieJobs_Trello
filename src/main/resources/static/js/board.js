@@ -1,7 +1,7 @@
 var TODO = (function (window){
 
 	 'use strict';
-	 
+
 	 	var baseURL = "http://localhost:9090";
 //	 	var baseURL = "http://localhost:8989";
 //		var baseURL = "http://junniejobs.xyz";
@@ -14,39 +14,63 @@ var TODO = (function (window){
 			                    "<div class='comment_reply'> Reply</div>" +
               			  "</div>";
 
-    var comment_template = Handlebars.compile(comment_html);       			             
+    var comment_template = Handlebars.compile(comment_html);
+
+		var card_html =
+					"<div class='list_card' data-id='{{data}}'>" +
+						 "<div class='list_card_detail'>" +
+									"<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' >{{value}}</a>" +
+						 "</div>" +
+					"</div>";
+
+		var deck_html = "<div class='list_wrapper' data-id='{{data}}'>" +
+					"<div class='list_content z-depth-1'>" +
+							"<div class='list_header'>"+
+							 "<textarea class='list_header_name'>{{value}}</textarea>"+
+						 "</div>" +
+							"<div class='list_cards'></div>" +
+			"<div class='card_composer'>" +
+									"<div class='show_add_card_form_form'>" +
+										"<textarea class='list_card_composer_textarea'></textarea>" +
+										 "<a class='waves-effect  waves-light btn card_save blue-grey lighten-5'>save</a>" +
+										 "<a class='waves-effect waves-light btn card_cancel blue-grey lighten-5'>cancel</a>" +
+									"</div>" +
+									"<a class='show_add_card_form' href='#''>Add a Card...</a>" +
+							"</div>" +
+					"</div>" +
+				"</div>";
 
 	function init(){
-		
-		
 
-  		$("#board_canvas").on("click", ".modalLink", show_modal);
+
+
+  	$("#board_canvas").on("click", ".modalLink", show_modal);
 		$(".btn-floating").on("click", show_create_deck_form);
 		$(".save").on("click", add_deck);
 		$("#board_canvas").on("click",".show_add_card_form", show_add_card_form);
 		$("#board_canvas").on("click",".card_save", card_save);
 		$("#board_canvas").on("click",".card_cancel", card_cancel);
-   		$( "#sortable" ).disableSelection();
+   	$( "#sortable" ).disableSelection();
 		$(".add_deck a.cancel").on("click", cancel);
 		$(".add_deck").removeClass("ui-sortable-handle");
-   		$(".attach_from_computer").on("click", file_upload);
-   		$(".comment_send").on("click", add_comment);
-   		$( "#sortable" ).sortable({
-    		  placeholder: "ui-state-highlight",
-    		  cancel: ".add_deck"
-   		});
-   		$( "#board_canvas" ).sortable();
-  		$( "#board_canvas" ).disableSelection();
-   		$(".members_btn").on("click", search_member);
-   		$(".due_date_btn").on("click", setting_date);
-   		$(".file_attachment").on("click", setting_attachment);
-	    $(".datepicker").pickadate({
-			    selectMonths: true, 
-			    selectYears: 15 
-	  	});
-	  	$(".close_button").on("click", close_modal);
-	  	$(".shadow_body").on("click", close_modal);
-	  	$('.modal-trigger').leanModal();
+ 		$(".attach_from_computer").on("click", file_upload);
+ 		$(".comment_send").on("click", add_comment);
+ 		$( "#sortable" ).sortable({
+  		  placeholder: "ui-state-highlight",
+  		  cancel: ".add_deck"
+ 		});
+ 		$( "#board_canvas" ).sortable();
+		$( "#board_canvas" ).disableSelection();
+ 		$(".members_btn").on("click", search_member);
+ 		$(".due_date_btn").on("click", setting_date);
+ 		$(".file_attachment").on("click", setting_attachment);
+    $(".datepicker").pickadate({
+		    selectMonths: true,
+		    selectYears: 15
+  	});
+  	$(".close_button").on("click", close_modal);
+  	$(".shadow_body").on("click", close_modal);
+  	$('.modal-trigger').leanModal();
 	}
 
 	function close_modal(){
@@ -73,7 +97,7 @@ var TODO = (function (window){
 		}
 
 		$(".modal_for_due_date").addClass("clicked").slideDown();
-		
+
 	}
 
 	function search_member(){
@@ -88,10 +112,10 @@ var TODO = (function (window){
 	}
 
 	function add_comment(e){
-		
+
 		var cardId = $(e.target).closest(".list_card").data("id");
 		console.log(cardId);
-	
+
 		var comment_contents = $(".comment_contents").val();
 		var writer_name = $(".username").val();
 		var now = new Date();
@@ -100,21 +124,21 @@ var TODO = (function (window){
 					  now.getFullYear() + " at " +
 					  now.getHours() + ":" +
 					  now.getMinutes();
-		
+
 		var cardId = $(".hiddenCardId").val();
-		
+
 		var data = {};
 		data.cardId = cardId;
 		data.username = writer_name;
 		data.contents = comment_contents;
 		data.timeStamp = currentTime;
 		console.log(data);
-		
+
 		if (comment_contents === "") {
 			alert("내용을 입력해주세요");
 			return;
 		}
-		
+
 		if (comment_contents !== null) {
 
 			$.ajax({
@@ -125,14 +149,14 @@ var TODO = (function (window){
 				console.log("newComment success")
 				console.log(data);
 				$(comment_template({"dataId":data.commentId,"comment_contents":comment_contents, "current_time":currentTime, "writer_name":writer_name})).appendTo(".comments");
-				$(".comment_contents").val("");	
+				$(".comment_contents").val("");
 			}).fail(function(status) {
 				console.log("newComment fail " + status);
 			});
-		}		
-		
-		
-		
+		}
+
+
+
 
 
 	}
@@ -197,7 +221,6 @@ var TODO = (function (window){
 		$('.modal-trigger').leanModal();
 	}
 
-	
 	function show_create_deck_form(){
 
 		$(".btn-floating").css('display','none');
@@ -209,30 +232,29 @@ var TODO = (function (window){
 		$(e.target).parent().find(".show_add_card_form_form").css('display', 'block');
 		$(e.target).parent().find("a.show_add_card_form").css('display', 'none');
 	}
-	
+
 	function card_save(e){
-		
-		
+
 		$(".show_add_card_form_form").css('display', 'none');
 		var card_Name = $(e.target).parent(".show_add_card_form_form").find(".list_card_composer_textarea").val();
 		var $list_wrapper = $(e.target).closest(".list_wrapper");
-		
+		console.log("리스트 래퍼를 찾겠어 ");
+		console.log($list_wrapper);
+
+
 		var boardId = $(".boardId").val();
 		var deckId = $(e.target).closest(".list_wrapper").data("id");
 		console.log(deckId);
-		
+
 		var data = {};
 		data.cardName = card_Name;
 		data.deckId = deckId;
 
-//		data.boardId = boardId;
-		
 		if (card_Name === "") {
 			alert("제목을 입력해주세요");
 			return;
 		}
-		
-		
+
 		if (card_Name !== null) {
 
 			$.ajax({
@@ -242,26 +264,21 @@ var TODO = (function (window){
 			}).done(function(data) {
 				console.log("newCard success")
 				console.log(data);
-			   var card_html = "<div class='list_card' data-id="+data.cardId+">" +
-      						"<div class='list_card_detail'>" +
-                      	 		"<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' >{{value}}</a>" +
-                     	 	"</div>" +
-                      "</div>";
-				
-				var card_template = Handlebars.compile(card_html);				
-				var str = card_template({"value":card_Name});
-				
-				$list_wrapper.find(".list_cards").append(str);
+
+				var card_template = Handlebars.compile(card_html);
+				var str = card_template({"value":card_Name, "data":data.cardId});
+
+				$list_wrapper.find(".list_cards").last().append(str);
 				$(e.target).parent(".show_add_card_form_form").find(".list_card_composer_textarea").val("");
 				$(e.target).parents(".card_composer").find("a.show_add_card_form").css('display', 'block');
 
 			}).fail(function(status) {
 				console.log("newDeck fail " + status);
-				
+
 			});
-		}		
+		}
 	}
-	
+
 	function add_deck(){
 
 		var deck_name = $("#add_deck").val();
@@ -269,7 +286,7 @@ var TODO = (function (window){
 		var data = {};
 		data.deckName = deck_name;
 		data.boardId = boardId;
-		
+
 		if (deck_name === "") {
 			alert("제목을 입력해주세요");
 			return;
@@ -283,45 +300,29 @@ var TODO = (function (window){
 				"data" : data
 			}).done(function(data) {
 				console.log("newDeck success")
-				console.log(data);	
-				
-				var deck_html = "<div class='list_wrapper' data-id="+data.deckId+">" +
-	            "<div class='list_content z-depth-1'>" +
-	                "<div class='list_header'>"+
-	                 "<textarea class='list_header_name'>{{input-value}}</textarea>"+
-	               "</div>" +
-	                "<div class='list_cards'></div>" +
-					"<div class='card_composer'>" +
-	                    "<div class='show_add_card_form_form'>" +
-	                      "<textarea class='list_card_composer_textarea'></textarea>" +
-	                       "<a class='waves-effect  waves-light btn card_save blue-grey lighten-5'>save</a>" +
-	                       "<a class='waves-effect waves-light btn card_cancel blue-grey lighten-5'>cancel</a>" +
-	                    "</div>" +
-	                    "<a class='show_add_card_form' href='#''>Add a Card...</a>" +
-	                "</div>" +
-	            "</div>" +
-	          "</div>";
-				
-				var str = deck_html.replace(/\{\{input-value\}\}/gi,deck_name);
-					
+				console.log(data);
+
+				var deck_template = Handlebars.compile(deck_html);
+				var str = deck_template({"value":deck_name, "data":data.deckId});
+
 				$(".add_deck").before(str);
 				$("#add_deck").val("");
 				$(".add_deck_form").css('display','none');
 				$(".btn-floating").css('display','block');
-			
+
 			}).fail(function(status) {
 				console.log("newDeck fail " + status);
 				console.log(status);
 			});
 		}
-		
-		
+
+
 	}
 
 	return {
 		"init" : init
 	}
-	
+
 })(window);
 
 $(function(){

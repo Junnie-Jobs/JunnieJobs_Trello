@@ -19,16 +19,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
-
-@Data
 @Entity
 @Table(name = "board")
 public class Board {
 
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long boardId;
+	
+	@Getter
+	@Setter
 	@Column(name = "boardName", length = 50, nullable = false)
 	private String boardName;
 	
@@ -38,12 +42,9 @@ public class Board {
 	
 	@JsonIgnore	
 	@OneToMany(mappedBy = "board")
-//	@Getter(onMethod = @__( @JsonIgnore ))
+	@Getter(onMethod = @__( @JsonIgnore ))
+	@Setter
 	private List<Deck> decks;
-//	
-//	@Column(name = "members")
-//	@OneToMany
-//	private List members;
 
 	public Board(){}
 	

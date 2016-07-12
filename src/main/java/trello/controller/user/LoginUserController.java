@@ -5,20 +5,35 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import trello.dao.UserRepository;
 import trello.model.User;
-import trello.service.CustomUserDetailsService;
 
+//
+//@Controller
+//@RequestMapping("/auth")
+//public class AuthController {
+//  @Autowired
+//  SecurityContextAccessor securityContextAccessor;
+//
+//  @Autowired
+//  @Qualifier("defaultTargetUrl")
+//  private String defaultTargetUrl;
+//
+//  @RequestMapping(value = "/login", method = RequestMethod.GET)
+//  public String login() {
+//    if (securityContextAccessor.isCurrentAuthenticationAnonymous()) {
+//      return "login";
+//    } else {
+//      return "redirect:" + defaultTargetUrl;
+//    }
+//  }
+//}
+//
 
 @Controller
 @RequestMapping("/users")
@@ -67,39 +82,19 @@ public class LoginUserController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(User user) {
-		System.out.println(user);
-		
-		User newUser = userRepository.findByEmail(user.getEmail());
-
-		log.info("logined User {}",newUser);
-
-//		User user = userRepository.findByEmail(email);
+//	@RequestMapping(value = "/login", method = RequestMethod.POST)
+//	public String login(User user) {
 //		
-//		if (user == null) {
-//			log.info("user가 존재하지 않습니다");
-//			System.out.println("유저가 존재 하지 않나?");
-//			model.addAttribute("loginFailed", true);
-//			return "redirect:/users/login";
-//		}
+//		System.out.println("일로 올려나?");
+//		System.out.println(user);
 //		
-//		String encodedPassword = passwordEncoder.encode(password);
-//		
-//		if(passwordEncoder.matches(password, encodedPassword)){
-//			
-//			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
-//			return "redirect:/boards/" + user.getId();
-//		}else {
-//			log.info("user의 패스워드가 일치하지 않습니다.");
-//			model.addAttribute("loginFailed", true);
-//			return "redirect:/";
-//		}
-//		}
-		return "redirect:/boards/"+user.getId();
-	}
-	
-	
+//		User newUser = userRepository.findByEmail(user.getEmail());
+//
+//		log.info("logined User {}",newUser);
+//		return "redirect:/boards/"+user.getId();
+//	}
+//	
+//	
 
 
 

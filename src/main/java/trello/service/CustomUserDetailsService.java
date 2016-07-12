@@ -1,8 +1,6 @@
 package trello.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -33,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException {
 		LOGGER.debug("load user email : {}", email);
-		trello.model.User user = userRepository.findByEmail(email);
+		trello.model.User user = userRepository.findByEmail(email); 
 		LOGGER.debug("loaded User : {}", user);
 		List<GrantedAuthority> authorities = buildUserAuthority();
 		return buildUserForAuthentication(user, authorities);
@@ -42,24 +40,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private User buildUserForAuthentication(trello.model.User user, List<GrantedAuthority> authorities) {
 		return new User(user.getUsername(), user.getPassword(),
 				true, true, true, true, authorities);
-		
-//		public User(String username, String password, boolean enabled,
-//				boolean accountNonExpired, boolean credentialsNonExpired,
-//				boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-//
-//			if (((username == null) || "".equals(username)) || (password == null)) {
-//				throw new IllegalArgumentException(
-//						"Cannot pass null or empty values to constructor");
-//			}
-//
-//			this.username = username;
-//			this.password = password;
-//			this.enabled = enabled;
-//			this.accountNonExpired = accountNonExpired;
-//			this.credentialsNonExpired = credentialsNonExpired;
-//			this.accountNonLocked = accountNonLocked;
-//			this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
-//		}
 	}
 	
 	private List<GrantedAuthority> buildUserAuthority() {

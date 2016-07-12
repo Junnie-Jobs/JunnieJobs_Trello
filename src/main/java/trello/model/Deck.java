@@ -16,22 +16,29 @@ import lombok.Setter;
 
 
 @Entity
-@Data
 @Table(name = "deck")
 public class Deck {
 
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long deckId;
+	
+	@Getter
+	@Setter
 	@Column(name = "deckName", length = 50, nullable = false)
 	private String deckName;
 
-//	@JsonIgnore
+
+	@Getter
+	@Setter
 	@ManyToOne
 	@NotNull
 	private Board board;
 	
-	@JsonIgnore
+	@Getter(onMethod = @__( @JsonIgnore ))
+	@Setter
 	@OneToMany(mappedBy = "deck")
 	private List<Card> cards;
 

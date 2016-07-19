@@ -1,7 +1,7 @@
 var TODO = (function (window){
 	
 //	var baseURL = "http://localhost:9090";
-	var baseURL = "http://junniejobs.xyz";
+	var baseURL = "https://junniejobs.xyz";
 	 'use strict';
 
 	 var board_btn = " <li class='board waves-effect waves-light btn'>" +		

@@ -1,7 +1,6 @@
 package trello.controller.user;
 
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,31 +8,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import trello.dao.UserRepository;
 import trello.model.User;
 
-//
-//@Controller
-//@RequestMapping("/auth")
-//public class AuthController {
-//  @Autowired
-//  SecurityContextAccessor securityContextAccessor;
-//
-//  @Autowired
-//  @Qualifier("defaultTargetUrl")
-//  private String defaultTargetUrl;
-//
-//  @RequestMapping(value = "/login", method = RequestMethod.GET)
-//  public String login() {
-//    if (securityContextAccessor.isCurrentAuthenticationAnonymous()) {
-//      return "login";
-//    } else {
-//      return "redirect:" + defaultTargetUrl;
-//    }
-//  }
-//}
-//
 
 @Controller
 @RequestMapping("/users")
@@ -81,6 +58,7 @@ public class LoginUserController {
 	public String loginForm() {
 		return "login";
 	}
+	
 	
 //	@RequestMapping(value = "/login", method = RequestMethod.POST)
 //	public String login(User user) {

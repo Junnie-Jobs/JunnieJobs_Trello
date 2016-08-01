@@ -23,8 +23,8 @@ security:
     sso:
       login-path: /users/login/facebook
     client:
-      clientId: 215599055502858
-      clientSecret: 98e9edae2f12a8d42e546319b8a44ee4
+      clientId: 281978238833212
+      clientSecret: 1e627b9dd9539a2d406c0fc7d8542998
       accessTokenUri: https://graph.facebook.com/oauth/access_token
       userAuthorizationUri: https://www.facebook.com/dialog/oauth
       tokenName: oauth_token

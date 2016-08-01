@@ -1,7 +1,7 @@
 var BOARDS = (function (window){
 	
-	var baseURL = "http://localhost:9090";
-//	var baseURL = "http://junniejobs.xyz";
+//	var baseURL = "http://localhost:9090";
+	var baseURL = "http://junniejobs.xyz";
 
 	 'use strict';
 

@@ -24,31 +24,7 @@
      
     
       <script type="text/javascript" src="/lib/jquery-2.2.0.min.js"></script>
-        <script type="text/javascript" >
-   	  (function(){
-      		$.ajax({
-				"url" : "http://localhost:9090/user",
-				"type" : "GET"
-			}).then(function(data) {
-				console.log(data.userAuthentication.details.name);
-				var facebookId = data.userAuthentication.details.id;	
-				var user_profile_imgUrl = "http://graph.facebook.com/" + facebookId + "/picture?type=square";
-				var facebookUser = {
-						 fbId : data.userAuthentication.details.id,
-						 username : data.userAuthentication.details.name
-				}
-				return $.ajax({
-					"url" : "http://localhost:9090/fbUserLogin",
-					"type" : "POST",
-					"data" : facebookUser					
-				});	
-			}).then(function(data){
-				console.log("facebook Login succeed");
-				window.location.href = ("/boards/"+data);
-			})
-      	})();	
-      
-      </script>
+
       
       <script src="/lib/handlebars-v4.0.5.js"></script>
       <script type="text/javascript" src="/lib/materialize.min.js"></script>

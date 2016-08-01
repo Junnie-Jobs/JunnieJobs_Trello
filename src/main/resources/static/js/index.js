@@ -91,9 +91,6 @@ var TODO = (function (window){
 		$(".add_project_form").css('display','block');
 	}
 
-//	function page_nav(){
-//		window.location.href = ("board");
-//	}
 
 	function create_board(){
 		$("#boards_list").prepend(board_btn);

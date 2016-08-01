@@ -1,7 +1,7 @@
 var TODO = (function (window){
 	
-//	var baseURL = "http://localhost:9090";
-	var baseURL = "https://junniejobs.xyz";
+	var baseURL = "http://localhost:9090";
+//	var baseURL = "https://junniejobs.xyz";
 	 'use strict';
 
 	 var board_btn = " <li class='board waves-effect waves-light btn'>" +		
@@ -12,10 +12,35 @@ var TODO = (function (window){
 	function init(){
 
 //		$("#boards_list").on("click", ".board", page_nav);
+		moveToBoards();
 		$("#create_board").on("click", create_board);
 		$(".add_project_btn").on("click", create_new_project);
 		$(".save").on("click", add_project);
 		$(".add_project a.cancel").on("click", cancel);
+	}
+	
+	function moveToBoards(){
+		
+		$.ajax({
+			"url" : baseURL+"/user",
+			"type" : "GET"
+		}).then(function(data) {
+			console.log(data.userAuthentication.details.name);
+			var facebookId = data.userAuthentication.details.id;	
+			var user_profile_imgUrl = "http://graph.facebook.com/" + facebookId + "/picture?type=square";
+			var facebookUser = {
+					 fbId : data.userAuthentication.details.id,
+					 username : data.userAuthentication.details.name
+			}
+			return $.ajax({
+				"url" : baseURL+"/fbUserLogin",
+				"type" : "POST",
+				"data" : facebookUser					
+			});	
+		}).then(function(data){
+			console.log("facebook Login succeed");
+			window.location.href = ("/boards/"+data);
+		})
 	}
 
 	function cancel(){

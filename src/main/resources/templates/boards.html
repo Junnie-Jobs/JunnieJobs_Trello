@@ -6,16 +6,27 @@
 	media="screen,projection" />
 <link type="text/css" rel="stylesheet" href="/css/boards.css"
 	media="screen,projection" />
+
 </head>
 <body>
-	<div id="header" class="z-depth-1"><a href="http://localhost:8989/">JWP-Trello</a></div>
- 	  <div id="my_board" th:text="${user.username}+'\'s board'">My Boards</div> 
+	<div id="header" class="z-depth-1"><a class="logout" href="/logout">logout</a><a href="http://localhost:9090/">JWP-Trello</a></div>
+ 	   <div id="profile" >
+ 	   		<div class="thumb">
+ 	   			 <img class="thumb_photo" th:src="@{'http://graph.facebook.com/'+${user.fbId}+'/picture?type=large&width=60&height=60'}">
+ 	   			
+ 	   			
+ 	   		</div>
+ 	   		<div class="user_info" th:text="${user.username}">My Boards</div>
+ 	   		<!-- <div class="user_info" th:text="${user.username}+'\'s boards'">My Boards</div> -->
+ 	  
+ 	   </div>
+ 	   <div id="my_board"></div>
   	 <input type="hidden" class="userId" th:value=${user.id}>
 	  <ul id="boards_list">
-          <ul th:each="board: ${boards}">	
+          <ul th:each="board: ${boards}">
             <li class="board project_1 waves-effect waves-light btn">
             	<a th:href="|/boards/board/${board.boardId}/${user.id}|" th:text="${board.boardName}">First Project</a></li>
-          </ul> 
+          </ul>
              <div class="add_project not_sortable" >
                <a class="btn-floating btn-large waves-effect waves-light red add_project_btn">
                       <i class="material-icons">add</i>

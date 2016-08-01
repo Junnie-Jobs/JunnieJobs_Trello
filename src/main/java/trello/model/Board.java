@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,9 +35,12 @@ public class Board {
 	@Column(name = "boardName", length = 50, nullable = false)
 	private String boardName;
 	
-//	@ManyToOne
-//	@JoinColumn(foreignKey = @ForeignKey(name = "fk_creator_id"))
-//	private User creator;
+	@ManyToOne
+	@JoinColumn(
+			foreignKey = @ForeignKey(name = "fk_creator_id"), 
+			nullable = false)
+	private User creator;
+	
 	
 	@JsonIgnore	
 	@OneToMany(mappedBy = "board")
@@ -44,8 +50,17 @@ public class Board {
 
 	public Board(){}
 	
-	public Board(String boardName) {
+	public Board(User user, String boardName) {
+		this.creator = user;
 		this.boardName = boardName;
+	}
+	
+	public Board( String boardName) {
+		this.boardName = boardName;
+	}
+	
+	public void createdBy(User user) {
+		this.creator = user;
 	}
 
 

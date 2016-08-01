@@ -14,9 +14,8 @@ public class HomeController {
 	
 private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 	
-	
 	 @RequestMapping("")
-	    public String moveHome() {		
+	    public String moveHome(Principal principal) {		
 	        return "index";
 	 }
 	 

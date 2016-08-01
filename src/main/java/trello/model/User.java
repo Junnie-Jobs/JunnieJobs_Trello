@@ -28,6 +28,12 @@ public class User {
 	private String email;
 	@Column(name = "password")
 	private String password;
+	@Column(name = "fbName")
+	private String fbName;
+	@Column(name = "fbId")
+	private String fbId;
+	@Column(name = "thumb_url")
+	private String thumb_url;
 
 	@Transient // - 데이타베이스에 매핑이 안되게 하는거
 	private String rawPassword;
@@ -40,6 +46,12 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public User(String fbId, String username){
+		this.fbId = fbId;
+		this.username = username;
+	}
+	
 	
 	public void encodePassword(PasswordEncoder passwordEncoder) {
 		this.password = passwordEncoder.encode(rawPassword);

@@ -1,6 +1,7 @@
 package trello.controller.user;
 
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import trello.dao.BoardRepository;
 import trello.dao.UserRepository;
 import trello.model.User;
 
@@ -26,9 +29,10 @@ public class LoginUserController {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-//	
-//	private CustomUserDetailsService cud;
 	
+	@Autowired
+	private BoardRepository boardRepository;
+
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 		public String signUpForm() {
@@ -59,21 +63,6 @@ public class LoginUserController {
 		return "login";
 	}
 	
-	
-//	@RequestMapping(value = "/login", method = RequestMethod.POST)
-//	public String login(User user) {
-//		
-//		System.out.println("일로 올려나?");
-//		System.out.println(user);
-//		
-//		User newUser = userRepository.findByEmail(user.getEmail());
-//
-//		log.info("logined User {}",newUser);
-//		return "redirect:/boards/"+user.getId();
-//	}
-//	
-//	
-
 
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -81,4 +70,6 @@ public class LoginUserController {
 		session.removeAttribute("user");
 		return "redirect:/";
 	}
+	
+
 }

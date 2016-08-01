@@ -3,7 +3,6 @@ package trello.controller.board;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -28,11 +27,21 @@ public class BoardController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Secured("ROLE_USER")
+//	@Secured("ROLE_USER")
 	@RequestMapping(value ="", method = RequestMethod.GET)
     public ModelAndView boardsPage(@AuthenticationPrincipal User activeUser) {
-
+		System.out.println(activeUser);
 	 trello.model.User user = userRepository.findByUsername(activeUser.getUsername());
+	 ModelAndView mav = new ModelAndView("boards");
+	 mav.addObject("boards", boardRepository.findAll());
+	 mav.addObject("user", user);
+     return mav;
+ }
+	
+	@RequestMapping(value ="/{userId}", method = RequestMethod.GET)
+    public ModelAndView moveToboardsPage(@PathVariable long userId) {
+	 trello.model.User user = userRepository.findById(userId);
+	 log.info("logined user: {}", user);
 	 ModelAndView mav = new ModelAndView("boards");
 	 mav.addObject("boards", boardRepository.findAll());
 	 mav.addObject("user", user);
@@ -49,14 +58,3 @@ public class BoardController {
 	}
 }
 
-
-//@RequestMapping(value ="/{userId}", method = RequestMethod.GET)
-//public ModelAndView projectMain(Model model, @PathVariable Long userId) {
-// 
-// ModelAndView mav = new ModelAndView("boards");
-// mav.addObject("boards", boardRepository.findAll());
-// User user = userRepository.findById(userId);
-// mav.addObject("user", user);
-// return mav;
-//}
-//

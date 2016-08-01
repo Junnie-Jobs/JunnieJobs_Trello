@@ -1,28 +1,30 @@
-server.port: 8080
+server.port: 9090
 spring:
+  profiles:
+    active: production
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:h2:mem:trello;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
-    driverClassName: org.h2.Driver
-    username: sa
-    password: null
+    url: jdbc:mysql://125.209.200.185:3306/JunnieJobsTrello
+    driverClassName: com.mysql.jdbc.Driver
+    username: junnie
+    password: ehdwns1q
   jpa:
     show-sql: true
-  h2:
-    console:
-      enabled: true
+    hibernate:
+      ddl-auto: validate
   resources:
     chain:
       enabled: true
-            
+
+
 security:
   oauth2:
     sso:
       login-path: /users/login/facebook
     client:
-      clientId: 233668646673605
-      clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+      clientId: 215599055502858
+      clientSecret: 98e9edae2f12a8d42e546319b8a44ee4
       accessTokenUri: https://graph.facebook.com/oauth/access_token
       userAuthorizationUri: https://www.facebook.com/dialog/oauth
       tokenName: oauth_token

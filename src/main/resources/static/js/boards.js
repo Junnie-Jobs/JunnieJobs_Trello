@@ -1,7 +1,7 @@
 var BOARDS = (function (window){
 	
-//	var baseURL = "http://localhost:9090";
-	var baseURL = "http://junniejobs.xyz";
+	var baseURL = "http://localhost:9090";
+//	var baseURL = "http://junniejobs.xyz";
 
 	 'use strict';
 
@@ -26,10 +26,9 @@ var BOARDS = (function (window){
 
 		var project_name = $("#add_project").val();
 		var userId = $(".userId").val();
-		
-		
 		var data = {};
 		data.boardName = project_name;
+		data.userId = userId;
 
 		if (project_name === "") {
 			alert("제목을 입력해주세요");

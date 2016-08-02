@@ -21,6 +21,8 @@ var TODO = (function (window){
 	
 	function moveToBoards(){
 		
+		console.log("move!");
+		
 		$.ajax({
 			"url" : baseURL+"/user",
 			"type" : "GET"

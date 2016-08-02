@@ -4,7 +4,7 @@ var TODO = (function (window){
 
 //	 	var baseURL = "http://localhost:9090";
 //	 	var baseURL = "http://localhost:8989";
-		var baseURL = "http://junniejobs.xyz";
+		var baseURL = "//junniejobs.xyz";
 
 
     var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +

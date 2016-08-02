@@ -35,20 +35,15 @@ public class ApiBoardController {
 		return newBoard;
 	}
 	
-//	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//	public ResponseEntity<Board> delete(@PathVariable Long id) {
-//		Board board = boardRepository.findOne(id);
-//		if (board == null) {
-//			return new ResponseEntity<Board>(HttpStatus.NOT_FOUND);
-//		}
-//		boardRepository.delete(board);
-//		return new ResponseEntity<Board>(HttpStatus.NO_CONTENT);
-//	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void update(Long boardId, String boardName) {
+		System.out.println("들어오나?");
+		Board board = boardRepository.findOne(boardId);
+		board.setBoardName(boardName);		
+	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void delete(Long id) {
-		System.out.println("들어온 값은");
-		System.out.println(id);
 		Board board = boardRepository.findOne(id);
 		boardRepository.delete(board);
 		

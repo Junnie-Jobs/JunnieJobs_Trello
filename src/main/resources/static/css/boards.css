@@ -132,6 +132,12 @@ a{
 
 }
 
+.board .modify_board_name{
+	
+	margin-top: 20px;
+/* 	border:1px solid black; */
+}
+
 .update_box{	
 /* 		border:1px solid black; */
 		width: 70px;

@@ -1,6 +1,6 @@
 var BOARDS = (function (window){
 	
-	//var baseURL = "http://localhost:8080";
+//	var baseURL = "http://localhost:8080";	
 	var baseURL = "//junniejobs.xyz";
 
 	 'use strict';
@@ -18,8 +18,43 @@ var BOARDS = (function (window){
 		$("#boards_list").on("click", ".delete_btn", deleteBoard);
 	}
 	
-	function updateBoard(){
+	function updateBoard(e){
 		
+		var board = $(e.target).closest(".board_ul").find(".board");
+		var boardId = $(e.target).closest(".board_ul").find(".board").data().boardid;
+		var boardName = $(".modify_board_name").val();
+		
+		if($(board).hasClass("modify")){
+			
+			var data = {};
+			data.boardId = $(e.target).closest(".board_ul").find(".board").data().boardid;
+			data.boardName = $(".modify_board_name").val();
+			console.log(data);
+			
+			$.ajax({
+				"url" : baseURL + "/api/board/update",
+				"type" : "POST",
+				"data" : data
+			}).done(function(){
+				$(".modify_board_name").remove();
+				$(board).find("a").removeClass("none").text(boardName);				
+			}).fail(function(){
+				console.log("modfiy event fail");
+			})
+			
+			$(board).removeClass("modify");
+			return;
+			
+		}
+		
+		var val = $(board).find("a").text();
+		console.log(val);
+		var modify = "<input class='modify_board_name' type='text' placeholder="+val+
+			"></input>";
+		
+		$(board).find("a").addClass("none");
+		$(board).append(modify).addClass("modify");
+//		
 	}
 	
 	function deleteBoard(e){

@@ -1,6 +1,6 @@
 var BOARDS = (function (window){
 	
-//	var baseURL = "http://localhost:9090";
+	//var baseURL = "http://localhost:8080";
 	var baseURL = "//junniejobs.xyz";
 
 	 'use strict';
@@ -8,11 +8,68 @@ var BOARDS = (function (window){
 
 	 
 	function init(){
-
+		
 		$("#create_board").on("click", create_board);
 		$(".add_project_btn").on("click", create_new_project);
 		$(".save").on("click", add_project);
 		$(".add_project a.cancel").on("click", cancel);
+		$(".setting_btn").on("click", update);
+		$("#boards_list").on("click", ".update_btn", updateBoard);
+		$("#boards_list").on("click", ".delete_btn", deleteBoard);
+	}
+	
+	function updateBoard(){
+		
+	}
+	
+	function deleteBoard(e){
+		
+		var boardId = $(e.target).closest(".board_ul").find(".board").data();
+		var board = $(e.target).closest(".board_ul").find(".board");
+		console.log(boardId);
+		var data = {};
+		data.id = boardId.boardid;
+		console.log(data);
+		
+		$.ajax({
+			"url" : baseURL + "/api/board/delete",
+			"type" : "POST",
+			"data" : data
+		}).done(function(){
+			console.log("board delete succeess");
+			$(board).remove();
+			$(e.target).closest(".update_box").remove();
+			
+		}).fail(function(){
+			console.log("deletion event fail");
+		})
+	}
+	
+	function update(){
+		
+		$("#my_board").toggleClass("update_view");
+		if($(".update_text").hasClass("none")){
+			$(".update_text").css('display','block').removeClass("none");
+			
+		var li = "<div class='update_box z-depth-1'>" +
+						"<div class='update_btn'>수정</div>" +
+						"<div class='delete_btn'>삭제</div>" +
+					"</div>"
+		$(".board_ul").append(li);
+		$(".board").css('width', '245px');
+		$(".add_project_btn").addClass("none");	
+		   return;
+		   
+		}else{
+			$(".update_text").css('display','none').addClass("none");
+			$(".update_box").addClass("none");
+			$(".add_project_btn").removeClass("none");	
+			return;
+		}
+		
+		
+			
+		
 	}
 
 	function cancel(){

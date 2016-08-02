@@ -12,19 +12,18 @@
 	<div id="header" class="z-depth-1"><a class="logout" href="/logout">logout</a><a href="http://localhost:9090/">JWP-Trello</a></div>
  	   <div id="profile" >
  	   		<div class="thumb">
- 	   			 <img class="thumb_photo" th:src="@{'//graph.facebook.com/'+${user.fbId}+'/picture?type=large&width=60&height=60'}">
- 	   			
- 	   			
+ 	   			 <img class="thumb_photo" src="//thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg", th:src="@{'//graph.facebook.com/'+${user.fbId}+'/picture?type=large&width=60&height=60'}">
  	   		</div>
- 	   		<div class="user_info" th:text="${user.username}">My Boards</div>
- 	   		<!-- <div class="user_info" th:text="${user.username}+'\'s boards'">My Boards</div> -->
- 	  
+ 	   		<div class="user_info" th:text="${user.username}">My Boards</div> 
+ 	   		<div class="update_text none">지금은 수정모드 입니다.</div>
+ 	   		<div class="setting_btn"><i class="material-icons small">settings</i></div> 
  	   </div>
+ 	          
  	   <div id="my_board"></div>
   	 <input type="hidden" class="userId" th:value=${user.id}>
 	  <ul id="boards_list">
-          <ul th:each="board: ${boards}">
-            <li class="board project_1 waves-effect waves-light btn">
+          <ul class="board_ul" th:each="board: ${boards}">
+            <li class="board project_1 waves-effect waves-light btn" th:data-boardId="${board.boardId}">
             	<a th:href="|/boards/board/${board.boardId}/${user.id}|" th:text="${board.boardName}">First Project</a></li>
           </ul>
              <div class="add_project not_sortable" >

@@ -1,12 +1,7 @@
 var BOARDS = (function (window){
 	
-//	var baseURL = "http://localhost:8080";	
-	var baseURL = "//junniejobs.xyz";
-
 	 'use strict';
 
-
-	 
 	function init(){
 		
 		$("#create_board").on("click", create_board);
@@ -32,7 +27,7 @@ var BOARDS = (function (window){
 			console.log(data);
 			
 			$.ajax({
-				"url" : baseURL + "/api/board/update",
+				"url" :  "/api/board/update",
 				"type" : "POST",
 				"data" : data
 			}).done(function(){
@@ -67,7 +62,7 @@ var BOARDS = (function (window){
 		console.log(data);
 		
 		$.ajax({
-			"url" : baseURL + "/api/board/delete",
+			"url" :  "/api/board/delete",
 			"type" : "POST",
 			"data" : data
 		}).done(function(){
@@ -130,7 +125,7 @@ var BOARDS = (function (window){
 		if (project_name !== null) {
 
 			$.ajax({
-				"url" : baseURL + "/api/board/new",
+				"url" : "/api/board/new",
 				"type" : "POST",
 				"data" : data
 			}).done(function(data) {

@@ -1,0 +1,14 @@
+drop table if exists `JunnieJobsTrello`.`board`;
+drop table if exists `JunnieJobsTrello`.`card`;
+drop table if exists `JunnieJobsTrello`.`comment`;
+drop table if exists `JunnieJobsTrello`.`deck`;
+drop table if exists `JunnieJobsTrello`.`user`;
+create table user (id bigint AUTO_INCREMENT, email varchar(255), fb_id varchar(255), fb_name varchar(255), password varchar(255), thumb_url varchar(255), username varchar(255), primary key (id));
+create table board (board_id bigint AUTO_INCREMENT, board_name varchar(50) not null, creator_id bigint not null, primary key (board_id));
+create table card (card_id bigint AUTO_INCREMENT, description varchar(3000), title varchar(150) not null, deck_deckId bigint not null, primary key (card_id));
+create table comment (comment_id bigint AUTO_INCREMENT, contents varchar(1000) not null, time_stamp varchar(255), username varchar(255) not null, card_cardId bigint, primary key (comment_id));
+create table deck (deck_id bigint AUTO_INCREMENT, deck_name varchar(50) not null, board_boardId bigint not null, primary key (deck_id));
+--alter table board add foreign key (creator_id) references user;
+--alter table card add foreign key (deck_deckId) references deck;
+--alter table comment add foreign key (card_cardId) references card;
+--alter table deck add foreign key (board_boardId) references board;

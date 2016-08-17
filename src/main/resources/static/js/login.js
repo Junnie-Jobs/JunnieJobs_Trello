@@ -1,15 +1,10 @@
 var LOGIN = (function (window){
 
 	 'use strict';
-	 
-//	var baseURL = "http://localhost:9090";
-	var baseURL = "//junniejobs.xyz";
-   			             
-
+	 		            
 	function init(){
 		
 		$(".login_btn").on("click", login);
-
 	}
 	
 	function login(){
@@ -22,7 +17,7 @@ var LOGIN = (function (window){
 		data.password = password;
 		
 		$.ajax({
-			"url" : baseURL + "/users/login",
+			"url" : "/users/login",
 			"type" : "POST",
 			"data" : data
 		}).done(function(data) {

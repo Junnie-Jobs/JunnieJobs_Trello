@@ -12,7 +12,7 @@ import com.google.common.collect.Maps;
 @RestController
 public class ApiHomeController {
 	
-	@RequestMapping("/servers/info")
+	@RequestMapping("/info")
 	public Map<String, Object> info(HttpServletRequest request) {
 		Map<String, Object> infos = Maps.newHashMap();
 		infos.put("ServerName", request.getLocalName());

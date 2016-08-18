@@ -335,6 +335,9 @@ body{
     white-space: normal;
 }
 
+.comment_list{
+	display: none;
+}
 .list_card_detail .list_card_title{
 
     clear: both;
@@ -699,7 +702,4 @@ body{
 #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
 html>body #sortable li { height: 1.5em; line-height: 1.2em; }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-
-
-
 

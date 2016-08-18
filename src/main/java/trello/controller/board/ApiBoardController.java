@@ -27,8 +27,6 @@ public class ApiBoardController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public Board createBoard(String boardName, Long userId) throws Exception {
-		System.out.println("들어온 유저아이디는");
-		System.out.println(userId);
 		User user = userRepository.findById(userId);
 		Board newBoard = new Board(user, boardName);
 		boardRepository.save(newBoard);	
@@ -37,7 +35,6 @@ public class ApiBoardController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(Long boardId, String boardName) {
-		System.out.println("들어오나?");
 		Board board = boardRepository.findOne(boardId);
 		board.setBoardName(boardName);		
 	}

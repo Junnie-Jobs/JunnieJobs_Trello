@@ -1,5 +1,7 @@
 package trello.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -44,6 +47,11 @@ public class Card {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_deck_id"))
 	private Deck deck;
+	
+	@Getter(onMethod = @__( @JsonIgnore ))
+	@Setter
+	@OneToMany(mappedBy = "card")
+	private List<Comment> comments;
 
 	public Card() {
 	}
@@ -53,7 +61,10 @@ public class Card {
 		this.title = title;
 		this.deck = deck;
 		deck.addCard(this);
-
+	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);
 	}
 
 }

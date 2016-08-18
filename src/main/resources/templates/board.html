@@ -40,11 +40,19 @@
                   <textarea class="list_header_name" value="First Todo" th:text="${deck.deckName}">Todo Header</textarea>
                 </div>
                		 <div class="list_cards" th:each="card : ${deck.cards}">
-                		<div class='list_card' th:attr="data-id=${card.cardId}">
+                		<div class='list_card'>
       						<div class='list_card_detail'>
-                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.title}"></a>
+                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.title}" th:attr="data-id=${card.cardId}"></a>
                      	 	</div>
-                      </div>
+	                     	 	<div class="comment_list" >
+	                     	 		<div class='comment' th:each="comment : ${card.comments}" th:attr="data-id=${comment.commentId}">
+					                    <div class='commenter' th:text="${comment.username}">{{writer_name}}</div>
+					                    <div class='comment_contents z-depth-1' th:text="${comment.contents}">{{comment_contents}}</div>
+					                    <div class='comment_date' th:text="${comment.timeStamp}">{{current_time}} - </div>
+					                    <div class='comment_reply'> Reply</div>
+	              			  		</div>
+	                     	 	</div>
+                      	</div>
                 </div>
                  <div class="card_composer">
                     <div class="show_add_card_form_form">
@@ -75,12 +83,14 @@
           </div>
 
     </div>
+    
+   <div class="data_hidden"></div>
 
   <!-- Modal Structure -->
   <div id="modalLayer" class="z-depth-1">
      <button type="button" class="close_button">X</button>
      <div class="modal_content">
-           <p class="card_title_in_modal">{{card_title}}</p>
+           <p class="card_title_in_modal" >{{card_title}}</p>
 
             <div class="list_name_wrapper">
                 <span class="in_list">in list</span>
@@ -89,7 +99,7 @@
 
             <p>Add comment</p>
             <div class="comment_frame">
-                 <textarea class="comment_contents z-depth-1" placeholder="Write a comment..."></textarea>
+                 <textarea class="comment_contents_form z-depth-1" placeholder="Write a comment..."></textarea>
             </div>
             <div class="comment_send">Send</div></br>
 

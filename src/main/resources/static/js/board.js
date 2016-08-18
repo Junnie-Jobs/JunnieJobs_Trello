@@ -2,10 +2,6 @@ var TODO = (function (window){
 
 	 'use strict';
 
-	 	var baseURL = "http://localhost:8080";
-//		var baseURL = "//junniejobs.xyz";
-
-
     var comment_html =   "<div class='comment' data-id='{{dataId}}'>" +
 			                    "<div class='commenter'>{{writer_name}}</div>" +
 			                    "<div class='comment_contents z-depth-1'>{{comment_contents}}</div>" +
@@ -40,16 +36,14 @@ var TODO = (function (window){
 				"</div>";
 
 	function init(){
-
-
-
-  	$("#board_canvas").on("click", ".modalLink", show_modal);
+					
+		$("#board_canvas").on("click", ".modalLink", show_modal);
 		$(".btn-floating").on("click", show_create_deck_form);
 		$(".save").on("click", add_deck);
 		$("#board_canvas").on("click",".show_add_card_form", show_add_card_form);
 		$("#board_canvas").on("click",".card_save", card_save);
 		$("#board_canvas").on("click",".card_cancel", card_cancel);
-   	$( "#sortable" ).disableSelection();
+		$( "#sortable" ).disableSelection();
 		$(".add_deck a.cancel").on("click", cancel);
 		$(".add_deck").removeClass("ui-sortable-handle");
  		$(".attach_from_computer").on("click", file_upload);
@@ -63,19 +57,19 @@ var TODO = (function (window){
  		$(".members_btn").on("click", search_member);
  		$(".due_date_btn").on("click", setting_date);
  		$(".file_attachment").on("click", setting_attachment);
-    $(".datepicker").pickadate({
+ 		$(".datepicker").pickadate({
 		    selectMonths: true,
 		    selectYears: 15
-  	});
-  	$(".close_button").on("click", close_modal);
-  	$(".shadow_body").on("click", close_modal);
-  	$('.modal-trigger').leanModal();
-	}
+ 		});
+	  	$(".close_button").on("click", close_modal);
+	  	$(".shadow_body").on("click", close_modal);
+	  	$('.modal-trigger').leanModal();
+		}
 
 	function close_modal(){
 
 		$("#modalLayer").fadeOut("slow");
-		$(".shadow_body").fadeOut("slow");
+		
 	}
 
 	function setting_attachment(){
@@ -112,10 +106,10 @@ var TODO = (function (window){
 
 	function add_comment(e){
 
-		var cardId = $(e.target).closest(".list_card").data("id");
-		console.log(cardId);
-
-		var comment_contents = $(".comment_contents").val();
+		var cardId = $(".data_hidden").data();
+		console.log(cardId.id);
+		var comment_contents = $(".comment_contents_form").val();
+		console.log(comment_contents);
 		var writer_name = $(".username").val();
 		var now = new Date();
 		var currentTime = now.getDate() + " " +
@@ -124,10 +118,8 @@ var TODO = (function (window){
 					  now.getHours() + ":" +
 					  now.getMinutes();
 
-		var cardId = $(".hiddenCardId").val();
-
 		var data = {};
-		data.cardId = cardId;
+		data.cardId = cardId.id;
 		data.username = writer_name;
 		data.contents = comment_contents;
 		data.timeStamp = currentTime;
@@ -141,14 +133,14 @@ var TODO = (function (window){
 		if (comment_contents !== null) {
 
 			$.ajax({
-				"url" : baseURL + "/api/comment/new",
+				"url" : "/api/comment/new",
 				"type" : "POST",
 				"data" : data
 			}).done(function(data) {
 				console.log("newComment success")
 				console.log(data);
 				$(comment_template({"dataId":data.commentId,"comment_contents":comment_contents, "current_time":currentTime, "writer_name":writer_name})).appendTo(".comments");
-				$(".comment_contents").val("");
+				$(".comment_contents_form").val("");
 			}).fail(function(status) {
 				console.log("newComment fail " + status);
 			});
@@ -194,14 +186,16 @@ var TODO = (function (window){
 	}
 
 	function show_modal(e){
-		$(".shadow_body").fadeIn("slow");
 		$("#modalLayer").fadeIn("slow");
 		var title = $(e.target).text();
 		$(".card_title_in_modal").text(title);
 		var list_name = $(e.target).closest(".list_content").find(".list_header_name").val();
 		$(".list_name").text(list_name);
 		$(".hiddenCardId").val($(e.target).closest(".list_card").data("id"));
-
+		var dataId = $(e.target).data();
+		$(".data_hidden").data("id", dataId.id);
+		var html = $(e.target).closest(".list_cards").find(".comment_list").html();
+		$(".comments").append(html);
 	}
 
 	function card_cancel(e){
@@ -257,7 +251,7 @@ var TODO = (function (window){
 		if (card_Name !== null) {
 
 			$.ajax({
-				"url" : baseURL + "/api/card/new",
+				"url" :  "/api/card/new",
 				"type" : "POST",
 				"data" : data
 			}).done(function(data) {
@@ -294,7 +288,7 @@ var TODO = (function (window){
 		if (deck_name !== null) {
 
 			$.ajax({
-				"url" : baseURL + "/api/deck/new",
+				"url" : "/api/deck/new",
 				"type" : "POST",
 				"data" : data
 			}).done(function(data) {

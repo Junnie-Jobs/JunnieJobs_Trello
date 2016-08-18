@@ -30,14 +30,12 @@ public class ApiCardController {
 		return cardRepository.findAll();
 	}
 	
-	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public Card createCard(String cardName, long deckId) throws Exception {
 		
 		Deck deck = deckRepository.findOne(deckId);
 		Card newCard = new Card(cardName, deck);
 		cardRepository.save(newCard);
-		System.out.println("새로운 카드가 추가되었습니다.");
 		return newCard;
 	}
 	

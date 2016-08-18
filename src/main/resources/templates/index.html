@@ -27,13 +27,12 @@
       <script type="text/javascript" >
    	  (function(){
    		  
-   		var baseURL = "http://localhost:8080";
-   		//var baseURL = "//junniejobs.xyz";
+
    		
 		console.log("move!");
 		
 		$.ajax({
-			"url" : baseURL+"/user",
+			"url" : "/user",
 			"type" : "GET"
 		}).then(function(data) {
 			console.log(data.userAuthentication.details.name);

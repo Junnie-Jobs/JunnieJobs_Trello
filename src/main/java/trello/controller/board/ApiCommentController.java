@@ -30,23 +30,9 @@ public class ApiCommentController {
 		Card card = cardRepository.findOne(cardId);
 		Comment newComment = new Comment(card, username, contents, timeStamp);
 		commentRepository.save(newComment);
-//		List<Comment> comments = commentRepository.findAll(cardId);
+
 		return newComment;
 	}
-	
-//	Deck deck = deckRepository.findOne(deckId);
-//	Card newCard = new Card(cardName, deck);
-	
-	
-//	@RequestMapping(value = "/get", method = RequestMethod.GET)
-//	public List<Comment> getAllComment(long cardId) throws Exception {
-//				
-//		List<Comment> comments = commentRepository.findAll(cardId);
-//		
-//		System.out.println("코멘츠는?");
-//		System.out.println(comments);
-//		return comments;
-//	}
-//	
+
 
 }

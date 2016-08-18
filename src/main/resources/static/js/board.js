@@ -195,6 +195,9 @@ var TODO = (function (window){
 		var dataId = $(e.target).data();
 		$(".data_hidden").data("id", dataId.id);
 		var html = $(e.target).closest(".list_cards").find(".comment_list").html();
+		console.log(html);
+		$(".comments_in_modal > .comment").remove();
+		console.log($(".comments_in_modal > .comment"));
 		$(".comments").append(html);
 	}
 
@@ -231,10 +234,6 @@ var TODO = (function (window){
 		$(".show_add_card_form_form").css('display', 'none');
 		var card_Name = $(e.target).parent(".show_add_card_form_form").find(".list_card_composer_textarea").val();
 		var $list_wrapper = $(e.target).closest(".list_wrapper");
-		console.log("리스트 래퍼를 찾겠어 ");
-		console.log($list_wrapper);
-
-
 		var boardId = $(".boardId").val();
 		var deckId = $(e.target).closest(".list_wrapper").data("id");
 		console.log(deckId);

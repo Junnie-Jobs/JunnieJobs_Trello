@@ -1,5 +1,4 @@
-server.port: 9090
-
+#server.port: 9090
 security:
   oauth2:
     sso:

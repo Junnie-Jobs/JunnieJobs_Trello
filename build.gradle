@@ -11,8 +11,6 @@ buildscript {
 	}
 }
 
-group = 'springio'
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'

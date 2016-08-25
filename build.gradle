@@ -20,7 +20,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'docker'
 
 jar {
-    baseName = 'JunnieJobs_Trello'
+    baseName = 'JunnieJobsTrello'
     version =  '0.1.0'
 }
 

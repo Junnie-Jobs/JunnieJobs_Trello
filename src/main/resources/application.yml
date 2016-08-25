@@ -1,16 +1,37 @@
 spring:
   profiles:
-    active: server
+    active: local
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://125.209.200.185:3306/TRELLO_ver2
-    driverClassName: com.mysql.jdbc.Driver
-    username: junnie
-    password: ehdwns1q
+    url: jdbc:h2:mem:trello;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true  
   resources:
     chain:
       enabled: true
+
+
+#spring:
+#  profiles:
+#    active: local
+#  thymeleaf:
+#    cache: false
+#  datasource:
+#    url: jdbc:mysql://125.209.200.185:3306/JunnieJobs_Trello
+#    driverClassName: com.mysql.jdbc.Driver
+#    username: junnie
+#    password: ehdwns1q
+#  resources:
+#    chain:
+#      enabled: true
+
 
 #flyway:
 #  enabled: true

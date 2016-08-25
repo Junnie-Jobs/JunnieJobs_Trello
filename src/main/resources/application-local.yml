@@ -14,8 +14,8 @@ security:
       clientAuthenticationScheme: form
     resource:
       userInfoUri: https://graph.facebook.com/me
-spring:
-  jpa: null
-  show-sql: true
-  hibernate:
-    ddl-auto: update
+#spring:
+#  jpa: null
+#  show-sql: true
+#  hibernate:
+#    ddl-auto: update

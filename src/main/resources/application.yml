@@ -1,13 +1,13 @@
 spring:
   profiles:
-    active: local
+    active: sever
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:h2:mem:trello;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://125.209.200.185:3306/JunnieJobs_Trello
+    driverClassName: com.mysql.jdbc.Driver
+    username: junnie
+    password: ehdwns1q
   jpa:
     show-sql: true
   h2:

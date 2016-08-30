@@ -10,9 +10,6 @@ spring:
     password: ehdwns1q
   jpa:
     show-sql: true
-  h2:
-    console:
-      enabled: true  
   resources:
     chain:
       enabled: true

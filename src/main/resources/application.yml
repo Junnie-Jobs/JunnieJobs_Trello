@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: sever
+    active: server
   thymeleaf:
     cache: false
   datasource:

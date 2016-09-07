@@ -111,7 +111,7 @@ body{
 #board_info{
 
     width: 100%;
-    height: 40px;
+    height: 80px;
     color:rgba(0,0,0,0.5);
     line-height: 40px;
     font-size: 20px;
@@ -120,7 +120,7 @@ body{
 
 #board_info .project_name{
     color:rgba(0,0,0,0.5);
-    line-height: 40px;
+    line-height: 80px;
     font-size: 20px;
     float: left;
 }
@@ -362,7 +362,7 @@ body{
     overflow: auto;
     border-radius: 7px;
     display: none;
-    margin: 0 auto;
+    margin: -180px auto 0 auto;
     position: relative;
     background-color: #edeff0;
     z-index:30;
@@ -653,16 +653,24 @@ body{
 
     width: 100%;
     border-bottom: 1px solid #e2e4e6;
-    padding-bottom: 25px;
+    padding-bottom: 40px;
     margin-top: 15px;
 }
 
+.user_photo img{
+	border-radius: 10%;
+	width:50px;
+	height:50px;
+	float:left;
+}
 #modalLayer .comment .commenter{
 
     height: 14px;
-    color: #4d4d4d;
-    font-weight: 700;
-    margin-bottom: 12px;
+     color: #8c8c8c;
+    margin-top: 12px;
+    margin-left: -49px; 
+    float:left;
+    font-size: 14px;
 
 
 }
@@ -678,6 +686,8 @@ body{
     border-radius: 5px;
     margin-bottom: 12px;
     word-wrap:break-word;
+    width: 85%;
+    margin-left: 60px;
 
 }
 
@@ -686,13 +696,14 @@ body{
     color: #8c8c8c;
     font-size: 14px;
     float: left;
+    margin-left: 10px;
 }
 
 #modalLayer .comment .comment_reply{
     color: #8c8c8c;
     font-size: 14px;
     float: left;
-    margin-left: 4px;
+    margin-left: 10px;
     text-decoration: underline;
     cursor: pointer;
 

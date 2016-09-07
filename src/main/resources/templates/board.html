@@ -1,162 +1,183 @@
 <html>
-    <head>
-      <meta charset="utf-8" />
-      <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="/css/board.css"  media="screen,projection"/>    
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    </head>
 
-    <body>
-    
-     <input type="hidden" class="boardId" th:value=${board.boardId}></input>
-   	 <input type="hidden" class="username" th:value=${user.username}></input>
-   
-      <div class="shadow_body"></div>
-       <div id="header" class="z-depth-1">
-           <span class="header_text">JWP-Trello<span>
-           <a class="modal-trigger z-depth-1" href="#modal1">Member +</a>
-       </div>
-       
-       
-       
+<head>
+  <meta charset="utf-8" />
+  <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/css/board.css" media="screen,projection" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<style>
+.thumb{
+	width:50px;
+	height:50px;
+	float:left;
+	margin-left:30px;
+	margin-top:10px;
+}
+		
+.thumb img{
 
-       <!-- Modal Structure -->
-          <div id="modal1" class="modal">
-            <div class="modal-content">
-               <div class="add_project_member_header">Add Member</div>
-                <input class="address_for_invitation" type="text" placeholder="e.g. taco@trello.com"/>
-                <div class="invite_for_project">Invite</div>
-            </div>
-          </div>  
-       <div id="board_info">
-           <div class="project_name" th:text="${board.boardName}">JWP's First Project </div>     
-       </div>
-       <div id="board_canvas" class="list_sortable" >
-       
-       	<div class="list_wrapper" th:each="deck : ${board.decks!=null}?${board.decks}" th:attr="data-id=${deck.deckId}">
-            <div class="list_content z-depth-1">
-                <div class="list_header">
-                  <textarea class="list_header_name" value="First Todo" th:text="${deck.deckName}">Todo Header</textarea>
-                </div>
-               		 <div class="list_cards" th:each="card : ${deck.cards}">
-                		<div class='list_card'>
-      						<div class='list_card_detail'>
-                      	 		<a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.title}" th:attr="data-id=${card.cardId}"></a>
-                     	 	</div>
-	                     	 	<div class="comment_list" >
-	                     	 		<div class='comment' th:each="comment : ${card.comments}" th:attr="data-id=${comment.commentId}">
-					                    <div class='commenter' th:text="${comment.username}">{{writer_name}}</div>
-					                    <div class='comment_contents z-depth-1' th:text="${comment.contents}">{{comment_contents}}</div>
-					                    <div class='comment_date' th:text="${comment.timeStamp}">{{current_time}} - </div>
-					                    <div class='comment_reply'> Reply</div>
-	              			  		</div>
-	                     	 	</div>
-                      	</div>
-                </div>
-                 <div class="card_composer">
-                    <div class="show_add_card_form_form">
-                      <textarea class="list_card_composer_textarea"></textarea>
-                       <a class="waves-effect  waves-light btn card_save blue-grey lighten-5">save</a>
-                       <a class="waves-effect waves-light btn card_cancel blue-grey lighten-5">cancel</a>
-                    </div>
-                    <a class="show_add_card_form" href="#">Add a Card...</a>
-                </div>
-             
-            </div>  
-          </div>
-          
-  
-       
-          <div class="add_deck not_sortable" >
-             <a class="btn-floating btn-large waves-effect waves-light red">
-                    <i class="material-icons">add</i>
-              </a>
-                <form class="add_deck_form">
-                  <div class="input-field col s12">
-                      <input id="add_deck" type="text" class="validate">
-                        <label for="list_name">Add a list...</label></br>
-                         <a class="waves-effect waves-light btn save blue-grey lighten-5">save</a>
-                        <a class="waves-effect waves-light btn cancel blue-grey lighten-5">cancel</a>
-                  </div>
-                </form>
-          </div>
+ 	border-radius: 100%; 
+}
 
-    </div>
-    
-   <div class="data_hidden"></div>
 
-  <!-- Modal Structure -->
-  <div id="modalLayer" class="z-depth-1">
-     <button type="button" class="close_button">X</button>
-     <div class="modal_content">
-           <p class="card_title_in_modal" >{{card_title}}</p>
+</style>
 
-            <div class="list_name_wrapper">
-                <span class="in_list">in list</span>
-                <span class="list_name">{{list_name}}</span>
-            </div>
+</head>
 
-            <p>Add comment</p>
-            <div class="comment_frame">
-                 <textarea class="comment_contents_form z-depth-1" placeholder="Write a comment..."></textarea>
-            </div>
-            <div class="comment_send">Send</div></br>
+<body>
 
-            <p>Activity</p>
-            <div class="comments comments_in_modal">
-               
-            </div>
+  <input type="hidden" class="boardId" th:value=${board.boardId}></input>
+  <input type="hidden" class="username" th:value=${user.username}></input>
+
+  <div class="shadow_body"></div>
+  <div id="header" class="z-depth-1">
+    <span class="header_text">JWP-Trello<span>
+      <a class="modal-trigger z-depth-1" href="#modal1">Member +</a>
     </div>
 
-     <div class="modal_sidebar">
-     <input type="hidden" class="hiddenCardId" value="cardId"/>
-              <p>Add</p>
-              <div class="modal_sidebar_btn z-depth-1 members_btn">Members</div>
 
-                  <div class="modal_for_members z-depth-1">
-                    <div class="members_btn_header">Members</div>
-                    <div class="search_member">
-                      <input type="text" placeholder="Search members" />
-                    </div>
-                  </div>
-
-              <div class="modal_sidebar_btn z-depth-1 due_date_btn"> Due Date</div>
-                <div class="modal_for_due_date z-depth-1">
-                    <div class="due_date_btn_header">Change Due Date</div>
-                      <form class="dpicker_widget">
-                      <div class="datapicker_select_date">
-                          <label for="date">Date</label></br>
-                          <input class="datepicker datapicker_select_input" type="date" placeholder="17/6/2016"/>
-                      </div>
-
-                      <div class="datapicker_select_time">
-                          <label for="time">Time</label></br>
-                          <input class="datapicker_select_input" type="text" placeholder="12:00" tabindex="101"/>
-                      </div>
-
-                    </form>
-                </div>
-  
-              <div class="modal_sidebar_btn z-depth-1 file_attachment">Attachment</div>
-
-                  <div class="modal_for_attachment z-depth-1">
-                        <div class="attachment_btn_header">Attach</div>
-                        <input type="file" id="fileUpload" name="files[]" /> 
-                        <div class="attach_from_computer">Computer</div>
-                        <div class="attach_with_link">Attach a link</div>
-                        <input type="text" class="link_for_attachment" placeholder="Paste any link here..." />
-                        <div class="link_submit z-depth-1">Attach</div>
-                  </div>
-              
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <div class="add_project_member_header">Add Member</div>
+        <input class="address_for_invitation" type="text" placeholder="e.g. taco@trello.com"/>
+        <div class="invite_for_project">Invite</div>
       </div>
-    
+    </div>
+    <div id="board_info">
+      <div class="project_name" th:text="${board.boardName}">JWP's First Project </div>
+         <div class="thumb">
+ 	   		<img class="thumb_photo" src="//thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg", th:src="@{'//graph.facebook.com/'+${user.fbId}+'/picture?type=large&width=60&height=60'}">
+ 	   	</div>
+    </div>
+    <div id="board_canvas" class="list_sortable" >
+
+      <div class="list_wrapper" th:each="deck : ${board.decks!=null}?${board.decks}" th:attr="data-id=${deck.deckId}">
+        <div class="list_content z-depth-1">
+          <div class="list_header">
+            <textarea class="list_header_name" value="First Todo" th:text="${deck.deckName}">Todo Header</textarea>
+          </div>
+          <div class="list_cards" th:each="card : ${deck.cards}">
+            <div class='list_card' th:attr="data-id=${card.cardId}">
+              <div class='list_card_detail'>
+                <a class='list_card_title modal-trigger modalLink' dir='auto' href='#modalLayer' th:text="${card.title}" ></a>
+              </div>
+              <div class="comment_list" >
+                <div class='comment' th:each="comment : ${card.comments}" th:attr="data-id=${comment.commentId}">
+                  <div class='commenter' th:text="${comment.username}">{{writer_name}}</div>
+                  <div class='comment_contents z-depth-1' th:text="${comment.contents}">{{comment_contents}}</div>
+                  <div class='comment_date' th:text="${comment.timeStamp}">{{current_time}} - </div>
+                  <div class='comment_reply'> Reply</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card_composer">
+            <div class="show_add_card_form_form">
+              <textarea class="list_card_composer_textarea"></textarea>
+              <a class="waves-effect  waves-light btn card_save blue-grey lighten-5">save</a>
+              <a class="waves-effect waves-light btn card_cancel blue-grey lighten-5">cancel</a>
+            </div>
+            <a class="show_add_card_form" href="#">Add a Card...</a>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="add_deck not_sortable" >
+        <a class="btn-floating btn-large waves-effect waves-light red">
+          <i class="material-icons">add</i>
+        </a>
+        <form class="add_deck_form">
+          <div class="input-field col s12">
+            <input id="add_deck" type="text" class="validate">
+            <label for="list_name">Add a list...</label></br>
+            <a class="waves-effect waves-light btn save blue-grey lighten-5">save</a>
+            <a class="waves-effect waves-light btn cancel blue-grey lighten-5">cancel</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="data_hidden"></div>
+
+    <!-- Modal Structure -->
+    <div id="modalLayer" class="z-depth-1">
+      <button type="button" class="close_button">X</button>
+      <div class="modal_content">
+        <p class="card_title_in_modal" >{{card_title}}</p>
+
+        <div class="list_name_wrapper">
+          <span class="in_list">in list</span>
+          <span class="list_name">{{list_name}}</span>
+        </div>
+
+        <p>Add comment</p>
+        <div class="comment_frame">
+          <textarea class="comment_contents_form z-depth-1" placeholder="Write a comment..."></textarea>
+        </div>
+        <div class="comment_send">Send</div>
+      </br>
+
+      <p>Activity</p>
+      <div class="comments comments_in_modal">
+
+      </div>
+    </div>
+
+    <div class="modal_sidebar">
+      <input type="hidden" class="hiddenCardId" value="cardId" />
+      <p>Add</p>
+      <div class="modal_sidebar_btn z-depth-1 members_btn">Members</div>
+
+      <div class="modal_for_members z-depth-1">
+        <div class="members_btn_header">Members</div>
+        <div class="search_member">
+          <input type="text" placeholder="Search members" />
+        </div>
+      </div>
+
+      <div class="modal_sidebar_btn z-depth-1 due_date_btn"> Due Date</div>
+      <div class="modal_for_due_date z-depth-1">
+        <div class="due_date_btn_header">Change Due Date</div>
+        <form class="dpicker_widget">
+          <div class="datapicker_select_date">
+            <label for="date">Date</label></br>
+            <input class="datepicker datapicker_select_input" type="date" placeholder="17/6/2016" />
+          </div>
+
+          <div class="datapicker_select_time">
+            <label for="time">Time</label></br>
+            <input class="datapicker_select_input" type="text" placeholder="12:00" tabindex="101" />
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal_sidebar_btn z-depth-1 file_attachment">Attachment</div>
+
+      <div class="modal_for_attachment z-depth-1">
+        <div class="attachment_btn_header">Attach</div>
+        <input type="file" id="fileUpload" name="files[]" />
+        <div class="attach_from_computer">Computer</div>
+        <div class="attach_with_link">Attach a link</div>
+        <input type="text" class="link_for_attachment" placeholder="Paste any link here..." />
+        <div class="link_submit z-depth-1">Attach</div>
+      </div>
+
+    </div>
+
   </div>
-      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-      <script src="/lib/jquery.fileupload.js"></script>
-      <script src="/lib/handlebars-v4.0.5.js"></script>
-      <script type="text/javascript" src="/lib/materialize.min.js"></script>
-      <script type="text/javascript" src="/js/board.js"></script>
-    </body>
-  </html>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="/lib/jquery.fileupload.js"></script>
+  <script src="/lib/handlebars-v4.0.5.js"></script>
+  <script type="text/javascript" src="/lib/materialize.min.js"></script>
+  <script type="text/javascript" src="/js/board.js"></script>
+</body>
+
+</html>

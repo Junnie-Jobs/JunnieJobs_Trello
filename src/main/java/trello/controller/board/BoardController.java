@@ -33,7 +33,7 @@ public class BoardController {
 //	@Secured("ROLE_USER")
 	@RequestMapping(value ="", method = RequestMethod.GET)
     public ModelAndView boardsPage(@AuthenticationPrincipal User activeUser) {
-	 System.out.println(activeUser);
+
 	 trello.model.User user = userRepository.findByUsername(activeUser.getUsername());
 	 List<Board> boards = boardRepository.findByCreator(user);
 	 ModelAndView mav = new ModelAndView("boards");

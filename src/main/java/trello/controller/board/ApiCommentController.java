@@ -20,13 +20,13 @@ public class ApiCommentController {
 		
 	@Autowired
 	private CardRepository cardRepository;
-		
+
 	@Autowired
 	private CommentRepository commentRepository;
-	
+
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public Comment createComment(long cardId, String username, String contents, String timeStamp) throws Exception {
-				
+
 		Card card = cardRepository.findOne(cardId);
 		Comment newComment = new Comment(card, username, contents, timeStamp);
 		commentRepository.save(newComment);
@@ -34,5 +34,13 @@ public class ApiCommentController {
 		return newComment;
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public List<Comment> showComment(long cardId) throws Exception {
+
+		Card card = cardRepository.findOne(cardId);
+		List<Comment> comments = commentRepository.findByCard(card);
+
+		return comments;
+	}
 
 }

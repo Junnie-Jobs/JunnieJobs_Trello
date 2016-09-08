@@ -14,21 +14,18 @@ import trello.dao.BoardRepository;
 import trello.dao.UserRepository;
 import trello.model.User;
 
-
 @Controller
 @RequestMapping("/users")
-public class LoginUserController {
+public class UserController {
 	
+
 	//로그인한 사용자정보 가져오는 방법
 	//@AuthenticationPrincipal User user
 
-	private static final Logger log = LoggerFactory.getLogger(LoginUserController.class);
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private BoardRepository boardRepository;
@@ -52,7 +49,6 @@ public class LoginUserController {
 
 		log.debug("새로운 유저가 추가되었습니다.");
 		log.debug("user : {}", user);
-		user.encodePassword(passwordEncoder);
 		userRepository.save(user);
 		return "redirect:/users/login";
 

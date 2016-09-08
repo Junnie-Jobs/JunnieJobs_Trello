@@ -1,18 +1,25 @@
 #server.port: 9090
-security:
-  oauth2:
-    sso:
-      login-path: /users/login/facebook
-    client:
-      clientId: 281978238833212
-      clientSecret: 1e627b9dd9539a2d406c0fc7d8542998
-      accessTokenUri: https://graph.facebook.com/oauth/access_token
-      userAuthorizationUri: https://www.facebook.com/dialog/oauth
-      tokenName: oauth_token
-      authenticationScheme: query
-      clientAuthenticationScheme: form
-    resource:
-      userInfoUri: https://graph.facebook.com/me
+facebook:
+  client:
+    clientId: 233668646673605
+    clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+    accessTokenUri: https://graph.facebook.com/oauth/access_token
+    userAuthorizationUri: https://www.facebook.com/dialog/oauth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://graph.facebook.com/me
+
+github:
+  client:
+    clientId: 47dfd22871c67b6bbf77
+    clientSecret: 0b5ac3ede0e5dc3f0bdd6e2aaa383a17a62cfa39
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user
 spring:
   jpa: null
   show-sql: true

@@ -21,14 +21,14 @@ public class ApiUserController {
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public Principal logout(Principal principal) {
+		System.out.println("user");
+		System.out.println(principal);
 		return principal;
 	}
 	
 	@RequestMapping(value = "/fbUserLogin", method = RequestMethod.POST)
 	public Long create(FacebookUser facebookUser, Model model, Principal principal) {
 		
-		System.out.println("principal에 대해");
-		System.out.println(principal);
 		User checkUser = userRepository.findByFbId(facebookUser.getFbId());
 		if(checkUser == null){		
 			User user = new User();
@@ -38,6 +38,22 @@ public class ApiUserController {
 			return user.getId();
 		}
 		return checkUser.getId();
+		
+	}
+	
+	@RequestMapping(value = "/githubUserLogin", method = RequestMethod.GET)
+	public void create(Principal principal) {
+		
+		System.out.println(principal);
+//		User checkUser = userRepository.findByFbId(facebookUser.getFbId());
+//		if(checkUser == null){		
+//			User user = new User();
+//			user.setFbId(facebookUser.getFbId());
+//			user.setUsername(facebookUser.getUsername());
+//			userRepository.save(user);
+//			return user.getId();
+//		}
+//		return checkUser.getId();
 		
 	}
 

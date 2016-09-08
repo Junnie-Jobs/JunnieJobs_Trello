@@ -1,5 +1,7 @@
 package trello.controller.board;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import trello.dao.BoardRepository;
 import trello.dao.UserRepository;
+import trello.model.Board;
 
 
 @Controller
@@ -30,10 +33,11 @@ public class BoardController {
 //	@Secured("ROLE_USER")
 	@RequestMapping(value ="", method = RequestMethod.GET)
     public ModelAndView boardsPage(@AuthenticationPrincipal User activeUser) {
-		System.out.println(activeUser);
+	 System.out.println(activeUser);
 	 trello.model.User user = userRepository.findByUsername(activeUser.getUsername());
+	 List<Board> boards = boardRepository.findByCreator(user);
 	 ModelAndView mav = new ModelAndView("boards");
-	 mav.addObject("boards", boardRepository.findAll());
+	 mav.addObject("boards", boards);
 	 mav.addObject("user", user);
      return mav;
  }

@@ -14,6 +14,8 @@ public class JunnieJobsTrelloApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JunnieJobsTrelloApplication.class, args);
+		
+		
 	}
 
 //	@Bean
